@@ -1,0 +1,547 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/misaka10032.jpg">
+  <link rel="icon" href="/img/misaka10032.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="">
+  
+  <meta name="author" content="misaka">
+  <meta name="keywords" content="">
+  
+  <title>数列 - misaka&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>misaka10032</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/playlist/">
+                <i class="iconfont icon-music-fill"></i>
+                music
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/post_banner.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数列">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-06 03:52" pubdate>
+        2021年3月6日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数列</h1>
+            
+            <div class="markdown-body">
+              <h2 id="一、数列"><a href="#一、数列" class="headerlink" title="一、数列"></a>一、数列</h2><h3 id="1-数列的概念"><a href="#1-数列的概念" class="headerlink" title="1.数列的概念"></a>1.数列的概念</h3><p><strong>依照某种规定排列着的一连串的数叫做数列</strong>。</p>
+<p><em>可以结合编程语言中的数组来理解数列。</em></p>
+<p>例如：数列 $0, 1, 2, 3, 4, 5, …$,  数列$\frac{1}{2}, \frac{1}{4}, \frac{1}{6}, …$</p>
+<h3 id="2-数列的项"><a href="#2-数列的项" class="headerlink" title="2.数列的项"></a>2.数列的项</h3><p><strong>数列的每一个数叫做数列的一个项；从1开始数(编程语言中的数组一般从0开始数)，第n(n为自然数)个位置上的项就叫做第n项。数列的第n项通常可以用$a_n$来表示。</strong></p>
+<p>例如：数列$\frac{1}{1}, \frac{1}{2}, \frac{1}{3}, …$</p>
+<p><strong>数列的第n项，也叫做数列的通项。如果这个项$a_n$和项数n间的关系可以用一个公式来表示，这个公式就叫做这个数列的通项公式。</strong></p>
+<p>例如上面那个数列的通项公式是:  $a_n=\frac{1}{n}$</p>
+<p><strong>需要注意不是每一个数列都有通项公式的。</strong></p>
+<p><em>知道了一个数列的通项公式，依次在n可取值的范围里，让n去各个不同的值代入公式，就可以求出这个数列的各个项。</em></p>
+<p>练习：</p>
+<p>$1. 已知数列的通项公式是: a_n=2*2^n, 写出它的前四项$</p>
+<p><em>反过来，如果知道了数列的开头几项， 也可以用试探的方法，写出它的一个通项公式，但是这种公式并不是唯一的。</em></p>
+<p>$2.已知一个数列的开头几项是\space 1, 3, 5, 7, …\space 求这个数列的通项公式。$</p>
+<h2 id="二、等差数列"><a href="#二、等差数列" class="headerlink" title="二、等差数列"></a>二、等差数列</h2><h3 id="1-等差数列的概念"><a href="#1-等差数列的概念" class="headerlink" title="1.等差数列的概念"></a>1.等差数列的概念</h3><p><strong>如果一个数列，从第2项起，每一项减去它的前面一项所得的差都等于某一个常数，那么这个数列就叫做等差数列。</strong></p>
+<p><strong>这个常数叫做等差数列的公差，通常用字母 $d$ 来表示。</strong></p>
+<p>例如: $数列 1, 2, 3, 4, 5, … 是一个等差数列，它的公差\space d\space 是 1$</p>
+<h3 id="2-等差数列的通项公式"><a href="#2-等差数列的通项公式" class="headerlink" title="2.等差数列的通项公式"></a>2.等差数列的通项公式</h3><p><strong>如果已经知道了一个数列是等差数列，并且知道了它的第1项 $a_1$ 和公差 $d$ ，就可以找出它的通项公式。</strong></p>
+<p>例如:</p>
+<p>$1. 已知一个等差数列的第一项是1，公差是2，求它的通项公式.$</p>
+<p>根据等差数列的定义，我们知道，这个数列开头几项应该是：</p>
+<p>$a_1=1, a_2=3, a_3=5, a_4=7, …$</p>
+<p>这里我们就可以归纳出一个一般的规律: 从第二项起，每一项都等于第一项加上公差的 $(n-1)$ 倍， 也就是：<br>$$<br>a_n=1+(n-1)2<br>$$</p>
+<p>当 n=1 的时候， 有 $a_1=1+(1-1)2=1$ ，所以这个公式也包括了第一项，因此它就是所求的通项公式。</p>
+<p><strong>一般，如果等差数列的第一项是 $a_1$ , 公差是 $d$ ， 这个数列就应该是：</strong><br>$$<br>a_1, a_1+d, a_1+2d, …, a_1+(n-1)d<br>$$</p>
+<p>这就是说：第一项是 $a_1$，公差是 $d$ 的等差数列的通项公式是：<br>$$<br>a_n=a_1+(n-1)d<br>$$<br>习题：</p>
+<p>&amp; 1.求下面这些等差数列的第n项：</p>
+<p>$(1)3, 7, 11, …$</p>
+<p>$(2)11, 7, 3, …$</p>
+<p>$(3)1, \frac{1}{3}, -\frac{1}{3}, …$</p>
+<h3 id="3-等差数列的前n项的和的公式"><a href="#3-等差数列的前n项的和的公式" class="headerlink" title="3.等差数列的前n项的和的公式"></a>3.等差数列的前n项的和的公式</h3><p> 一般，设 $S_n$ 是等差数列 $a_1, a_1+d, a_1+2d, a_1+(n-1)d$ 前n项的和，那么:<br>$$<br>S_n=a_1+(a_1+d)+(a_1+2d)+…+[a_1+(n-2)d]+[a_1+(n-1)d] \tag{Ⅰ}<br>$$</p>
+<p>把这个等式的右边倒过来可以改写成<br>$$<br>S_n=[a_1+(n-1)d]+[a_1+(n-2)d]+…+(a_1+2d)+(a_1+d)+a_1<br>$$</p>
+<p>把上面两式的左右两边分别相加，得到<br>$$<br>\begin{align}<br>2S_n=&amp; {a_1+[a_1+(n-1)d]}+{(a_1+d)+[a_1+(n-2)d]}+{[a_1+(n-2)d]+(a_1+d)}+{[a_1+(n-1)d]+a_1}\<br>=&amp; [2a_1+(n-1)d]*n<br>\end{align}<br>$$</p>
+<p>所以：<br>$$<br>S_n=\frac{n[2a_1+(n-1)d]}{2} \tag{Ⅱ}<br>$$</p>
+<p>根据等差数列的通项公式<br>$$<br>a_n=a_1+(n-1)d<br>$$<br>在公式 (Ⅱ) 里把 $a_1+(n-1)d$ 代以 $a_n$ , 就得到<br>$$<br>S_n=\frac{n(a_1+a_n)}{2} \tag{Ⅲ}<br>$$<br>这个公式指出：等差数列前 n 项的和等于第一项与第 n 项的和的一半的 n 倍。</p>
+<h3 id="4-求和符号"><a href="#4-求和符号" class="headerlink" title="4.求和符号"></a>4.求和符号</h3><p>我们一般用希腊字母 $\sum$ (sigma)来表示一组数的和，如等差数列 $1, 2, 3, 4, 5, … , 100$ 的和我们可以表示为<br>$$<br>\sum_{n=1}^{100}n<br>$$<br>这个数可以是以函数的形式给出，还是以上面的数列为例子：<br>$$<br>\begin{align}<br>&amp; 有函数 f(x) = x+1 \<br>&amp; \sum_{n=1}^{100}f(n) \<br>&amp; 那么这个式子表示的就是从1到100的所有自然数先自增1再进行求和<br>\end{align}<br>$$</p>
+<h2 id="三、等比数列-暂时了解概念"><a href="#三、等比数列-暂时了解概念" class="headerlink" title="三、等比数列(暂时了解概念)"></a>三、等比数列(暂时了解概念)</h2><p><strong>如果一个数列，从第2项起，每一项除以它的前面一项所得的比值都等于某一个常数，那么这个数列就叫做等比数列。</strong></p>
+<p><strong>这个常数叫做等比数列的公比，通常用字母 $q$ 来表示。</strong></p>
+<p>例如: $数列 2, 4, 8, 16, 32, … 是一个等比数列，它的公比\space q\space 是 2$</p>
+<p>等比数列的项不能为 0。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/">离散数学</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/06/dm_final/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第一篇</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/06/dm_Lesson_02/">
+                        <span class="hidden-mobile">排列与组合</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/mikoto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>

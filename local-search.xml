@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>jmp 指令</title>
+    <link href="/2021/03/06/jmp/"/>
+    <url>/2021/03/06/jmp/</url>
+    
+    <content type="html"><![CDATA[<h3 id="jmp-指令"><a href="#jmp-指令" class="headerlink" title="jmp 指令"></a>jmp 指令</h3><p>jmp 为无条件转移指令，可以只修改 IP，也可以同时修改 CS 和 IP。</p><p>jmp 指令需要给出两种信息：</p><ol><li>转移的目的地址</li><li>转移的距离(段间转移、段内短转移、段内近转移)</li></ol><h4 id="jmp-short"><a href="#jmp-short" class="headerlink" title="jmp short"></a>jmp short</h4><p>格式：jmp short 标号</p><p>这种格式的 jmp 指令实现的是段内短转移，它对 IP 的修改范围是 $-128 \sim 127$ ，也就是说它向前转移时可以最多越过 128 个字节，向后转移最多越过 127 个字节。jmp 指令中的 “short” 符号，说明指令进行的是短转移。jmp 指令中的 “标号” 是代码段中的标号，指明了指令要转移的目标地址，转移指令执行结束后，CS:IP 应该指向标号处的指令。</p><p>例如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov ax,3<br>jmp short go<br>add ax,1<br>go: inc ax<br></code></pre></td></tr></table></figure><p>其编译后的汇编指令如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs assembly">0BBD:0000 B80000 MOV AX,0003<br>0BBD:0003 EB03   JMP 0008<br>0BBD:0005 050100 ADD AX,0001<br>0BBD:0008 40     INC AX<br></code></pre></td></tr></table></figure><p>CPU 执行指令的流程：</p><ol><li>从 CS:IP 指向的内存单元中读取指令，读取的指令进入指令缓冲器</li><li>IP = IP + 所读取的指令长度，指向下一条指令</li><li>执行指令，回到步骤1</li></ol><p>从编译后的汇编代码来看，jmp short go 被读取后，IP = IP + 2(jmp short go 的指令长度，为两个字节)，因此 IP = 0005；接着 jmp short go 被执行，IP = IP + 3 (add ax,1的指令长度，为3个字节)，此时 IP = IP + 3，也就是 IP = 0008，最终 add ax,1 没有被执行，IP 指向了 inc ax。</p><p>jmp short功能说明：</p><ol><li>8位位移 = 标号处的地址 - jmp 指令后的第一个字节的地址</li><li>short 指明此处的位移为 8 位位移</li><li>8 位位移的范围是 $-128 \sim 127$</li><li>8 位位移由编译程序再编译时计算得出</li></ol><h4 id="jmp-near"><a href="#jmp-near" class="headerlink" title="jmp near"></a>jmp near</h4><p>格式：jmp near 标号</p><p>jmp near 指令和 jmp short 指令功能相近，它实现的是 16位段内近转移。</p><p>也就是说这个指令支持的位移范围是 $-32768 \sim 32767$</p><p>jmp near 功能说明：</p><ol><li>16位位移 = 标号处的地址 - jmp 指令后的第一个字节的地址</li><li>near 指明此处的位移为 16 位位移</li><li>16 位位移的范围是 $-32768 \sim 32767$</li><li>16位位移由编译程序再编译时计算得出</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>x86汇编</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>movsb 与 movsw 指令</title>
+    <link href="/2021/03/06/movsb_movsw/"/>
+    <url>/2021/03/06/movsb_movsw/</url>
+    
+    <content type="html"><![CDATA[<h3 id="段之间的批量数据传送"><a href="#段之间的批量数据传送" class="headerlink" title="段之间的批量数据传送"></a>段之间的批量数据传送</h3><h4 id="movsb和movsw"><a href="#movsb和movsw" class="headerlink" title="movsb和movsw"></a>movsb和movsw</h4><p>movsb 和 movsw 这两个指令通常用于把数据从内存中的一个地方批量复制到另一个地方，处理器把它们看成是数据串。</p><p>movsb 以字节为单位，movsw 以字(两个字节)为单位。</p><p>movsb 和 movsw 指令执行时，源地址的段地址由 DS 指定，偏移地址由 SI 指定，简写为 DS:SI， 目的地址由 ES:DI 指定；传送的字节数或字数由 CX 指定。</p><p>传送方向有两种：</p><ul><li>正向传送：从内存低地址到高地址；每次 SI 和 DI 加 1 或 加 2。</li><li>反向传送：从内存高地址到低地址；每次 SI 和 DI 减 1 或 减 2。</li></ul><p>不管传送方向和传送单位是字节还是字， 没传送一次，CX 的值自动减一。</p><h4 id="DF-标志位-Direction-Flag"><a href="#DF-标志位-Direction-Flag" class="headerlink" title="DF 标志位(Direction Flag)"></a>DF 标志位(Direction Flag)</h4><p>通过将这一位清零或者置为1，就能控制 movsb 和 movsw 的传送方向。</p><p>设置方法如下：</p><ul><li>cld指令(clear direction flag) ：无操作数，指令执行后，将 DF 清0；此时是正方向。</li><li>std指令(set direction flag)：无操作数，指令执行后，将 DF 置1；此时是反方向。</li></ul><h4 id="rep-前缀-repeat"><a href="#rep-前缀-repeat" class="headerlink" title="rep 前缀(repeat)"></a>rep 前缀(repeat)</h4><p>movsb 和 movsw 只能执行一次，如果需要处理器自动地反复执行，需要加上指令前缀 rep ，则表示 CX 不为零则重复。</p><p>rep movsw 地操作码 是 0xF3 0xA5，它将重复执行 movsw 直至 CX 的值位 0 。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>x86汇编</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>

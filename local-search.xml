@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Ubuntu 18.04 apt 被占用问题</title>
+    <link href="/2021/03/08/ubuntu_apt%E8%A2%AB%E5%8D%A0%E7%94%A8/"/>
+    <url>/2021/03/08/ubuntu_apt%E8%A2%AB%E5%8D%A0%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>使用 apt 安装软件包时报错：</p><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporarily unavailable)<br>E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?<br></code></pre></div></td></tr></table></figure><p>解决方法:</p><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">sudo rm /var/lib/apt/lists/lock<br>sudo rm /var/cache/apt/archives/lock<br>sudo rm /var/lib/dpkg/lock*<br>sudo dpkg --configure -a<br>sudo apt update<br></code></pre></div></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ssh 登录失败，公钥已被更改问题</title>
     <link href="/2021/03/06/ssh_%E7%99%BB%E5%BD%95%E5%A4%B1%E8%B4%A5%E5%85%AC%E9%92%A5%E9%97%AE%E9%A2%98/"/>
     <url>/2021/03/06/ssh_%E7%99%BB%E5%BD%95%E5%A4%B1%E8%B4%A5%E5%85%AC%E9%92%A5%E9%97%AE%E9%A2%98/</url>

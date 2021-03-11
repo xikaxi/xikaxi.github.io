@@ -20,7 +20,7 @@
   <meta name="author" content="玩世不恭&#39;s">
   <meta name="keywords" content="">
   
-  <title>微信支付-会员升级 - 玩世不恭&#39;s blog</title>
+  <title>前端请求登录 获取token存取 - 玩世不恭&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -189,7 +189,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="微信支付-会员升级">
+            <span class="h2" id="subtitle" title="前端请求登录 获取token存取">
               
             </span>
 
@@ -204,8 +204,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-09 15:19" pubdate>
-        2021年3月9日 下午
+      <time datetime="2021-03-11 16:05" pubdate>
+        2021年3月11日 下午
       </time>
     </span>
   
@@ -216,7 +216,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      502 字
+      317 字
     </span>
   
 
@@ -226,7 +226,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      4
        分钟
     </span>
   
@@ -264,49 +264,34 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">微信支付-会员升级</h1>
+            <h1 style="display: none">前端请求登录 获取token存取</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月9日 下午
+                  本文最后更新于：2021年3月11日 下午
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="会员升级–补差价"><a href="#会员升级–补差价" class="headerlink" title="会员升级–补差价"></a><font color="#008080">会员升级–补差价</font></h2><p><code>前情提要</code></p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx">根据微信支付来实现的会员升级 (低配版)<br>用户购买年会员/不够用 但是使用的时间才三个月<br>可是重新购买一个的话 就浪费了 所以需要升级会员<br>本章使用: Python3.6 django MySQL<br></code></pre></div></td></tr></table></figure>
+              <h2 id="关于前端获取存放token"><a href="#关于前端获取存放token" class="headerlink" title="关于前端获取存放token"></a><font color="#BBFF00">关于前端获取存放token</font></h2><p><img src="https://ae01.alicdn.com/kf/U2bebf28b35e246579dd1da32dfc16d0co.jpg" srcset="/img/loading.gif" alt="流程图"></p>
+<p><code>前情提要</code></p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx">用户请求登录接口的时候 后端获取数据 认证 返回认证数据到前端<br>前端拿到认证数据后 缓存<br>通过ajax获取认证数据 用于验证用户<br></code></pre></div></td></tr></table></figure>
 
-<p><code>流程图&lt;--&gt;逻辑</code></p>
-<p><img src="https://p.pstatp.com/origin/137790001afcaaf439a79" srcset="/img/loading.gif" alt="流程"></p>
-<h2 id="升级代码-获取用户的等级与价格"><a href="#升级代码-获取用户的等级与价格" class="headerlink" title="升级代码/获取用户的等级与价格"></a><font color="#008080">升级代码/获取用户的等级与价格</font></h2><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-<th>备注</th>
-<th>请求方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>参考路由</td>
-<td><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/memberupgrade/">http://127.0.0.1:8000/memberupgrade/</a></td>
-<td>会员升级/需获取当前用户的级别</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>body</td>
-<td>xxx微信支付</td>
-<td>商品描述</td>
-<td></td>
-</tr>
-<tr>
-<td>total_fee</td>
-<td>2980</td>
-<td>现价格</td>
-<td></td>
-</tr>
-</tbody></table>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 认证用户的jwt_token</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MemberUpgradeView</span>(<span class="hljs-params">APIView</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;MemberUpgradeView 该类--&gt;会员升级&quot;&quot;&quot;</span><br>    authentication_classes = [MyBaseAuthentication, ]  <span class="hljs-comment"># 认证用户/登录/过期/单点登录</span><br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">post</span>(<span class="hljs-params">self, request</span>):</span><br>        body = request.POST.get(<span class="hljs-string">&#x27;body&#x27;</span>).encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)  <span class="hljs-comment"># 商品描述</span><br>        total_fee = <span class="hljs-built_in">int</span>(request.POST.get(<span class="hljs-string">&#x27;total_fee&#x27;</span>))  <span class="hljs-comment"># 现价格</span><br>        user = request.user  <span class="hljs-comment"># 获取登录的用户/会员</span><br>        create_vip_time = user.create_vip_time  <span class="hljs-comment"># 创建会员的日期</span><br>        nowdays = datetime.datetime.now()  <span class="hljs-comment"># 今天的日期</span><br>        days = (nowdays - create_vip_time).days  <span class="hljs-comment"># 用掉的天数</span><br>        <span class="hljs-keyword">if</span> days &lt;= <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;会员使用不足7天&#x27;</span>&#125;)<br>        <span class="hljs-string">&quot;&quot;&quot;这一块的校验 自己添加&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> user.user_type == <span class="hljs-number">1</span>:  <span class="hljs-comment"># 根据用户的等级 确认升级的会员</span><br>            <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;您不是会员,可先购买后升级会员&#x27;</span>&#125;)<br>        <span class="hljs-keyword">elif</span> user.user_type == <span class="hljs-number">2</span>:<br>            day_price = <span class="hljs-number">1980</span> / <span class="hljs-number">12</span> / <span class="hljs-number">30</span>  <span class="hljs-comment"># 日价格</span><br>            price_difference = total_fee - (<span class="hljs-number">1980</span> - day_price * days)  <span class="hljs-comment"># 差价计算</span><br>        out_trade_no = create_orderId(<span class="hljs-number">5</span>)<br>        body = body.decode()<br>        price_difference = price_difference * <span class="hljs-number">100</span><br>        data_dict = wxpay(body, <span class="hljs-built_in">int</span>(price_difference), out_trade_no)  <span class="hljs-comment"># 得到字典数据</span><br>        user = request.user<br>        <span class="hljs-keyword">if</span> data_dict.get(<span class="hljs-string">&#x27;return_code&#x27;</span>) == <span class="hljs-string">&#x27;SUCCESS&#x27;</span>:<br>            code_url = get_code_url(data_dict)  <span class="hljs-comment"># 获取二维码字符串</span><br>            img = create_image(code_url)  <span class="hljs-comment"># 创建支付 二维码</span><br>            qrcode_name = out_trade_no + <span class="hljs-string">&#x27;.png&#x27;</span><br>            img.save(<span class="hljs-string">r&#x27;static&#x27;</span> + <span class="hljs-string">&#x27;/&#x27;</span> + qrcode_name)<br>            img_url = <span class="hljs-string">&#x27;/static/&#x27;</span> + qrcode_name<br>            <span class="hljs-comment"># 订单写入 关联个人</span><br>            OrderInfo.objects.create(order_id=out_trade_no, user=user, total_amout=total_fee, status=<span class="hljs-string">&#x27;&#x27;</span>)<br>            <span class="hljs-keyword">return</span> Response(<br>                &#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.OK, <span class="hljs-string">&#x27;img_url&#x27;</span>: img_url, <span class="hljs-string">&#x27;order_id&#x27;</span>: out_trade_no, <span class="hljs-string">&#x27;total_fee&#x27;</span>: price_difference&#125;)<br>        <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;获取微信code_url失败&#x27;</span>&#125;)<br></code></pre></div></td></tr></table></figure>
+<h2 id="登录SUCCESS时候-通过请求获取认证数据"><a href="#登录SUCCESS时候-通过请求获取认证数据" class="headerlink" title="登录SUCCESS时候,通过请求获取认证数据"></a><font color="#BBFF00">登录SUCCESS时候,通过请求获取认证数据</font></h2><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">$ajax(&#123;<br>    <span class="hljs-comment">// 测试接口</span><br>    url:<span class="hljs-string">&quot;pro/user/login&quot;</span>,<br>    data: &#123;<br>        <span class="hljs-string">&quot;uName&quot;</span>: <span class="hljs-string">&quot;wsbg&quot;</span>,<br>        <span class="hljs-string">&quot;pPwd&quot;</span>: <span class="hljs-string">&quot;wdtazbn9527&quot;</span><br>    &#125;,<br>    type: <span class="hljs-string">&quot;post&quot;</span>,<br>    dataType: <span class="hljs-string">&quot;json&quot;</span>,<br>    success: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) </span>&#123;<br>        <span class="hljs-comment">// 返回成功的时候</span><br>        <span class="hljs-keyword">var</span> uToken = data.uToken;<br>        <span class="hljs-comment">//存放uToken</span><br>        <span class="hljs-built_in">window</span>.localStorage.setItem(<span class="hljs-string">&#x27;uToken&#x27;</span>,uToken);<br>        <br>        &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="请求主页或者其他接口的时候-携带token"><a href="#请求主页或者其他接口的时候-携带token" class="headerlink" title="请求主页或者其他接口的时候 携带token"></a><font color="#BBFF00">请求主页或者其他接口的时候 携带token</font></h2><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-comment">// 提取认证信息</span><br><span class="hljs-keyword">var</span>  uToken = <span class="hljs-built_in">window</span>.localStorage.getItem(<span class="hljs-string">&quot;uToken&quot;</span>);<br>$.ajax(&#123;<br>    headers: &#123;<br>        <span class="hljs-string">&quot;token&quot;</span>: uToken <span class="hljs-comment">//缓存的token 用于验证用户</span><br>    &#125;,<br>    url: <span class="hljs-string">&quot;pro/index/INFO/&quot;</span>, <span class="hljs-comment">//请求接口</span><br>    type: <span class="hljs-string">&quot;post&quot;</span>,<br>    dataType: <span class="hljs-string">&#x27;json&#x27;</span>,<br>    data: &#123;<br>    &#125;,<br>    success: <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;<br>        <span class="hljs-comment">//请求成功的时候</span><br>    &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="前端的sessionStorage-与-localStorage"><a href="#前端的sessionStorage-与-localStorage" class="headerlink" title="前端的sessionStorage 与 localStorage"></a><font color="#BBFF00">前端的sessionStorage 与 localStorage</font></h2><p>sessionStorage 只在当前的窗口有效 浏览器关闭 则清除缓存</p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-comment">//设置</span><br><span class="hljs-built_in">window</span>.seesionStorage.setItem(<span class="hljs-string">&#x27;token&#x27;</span>,uToken)<br><br><span class="hljs-comment">//获取</span><br><span class="hljs-built_in">window</span>.sessionStorage.getItem(<span class="hljs-string">&#x27;token&#x27;</span>);<br><br><span class="hljs-comment">//清除</span><br><span class="hljs-built_in">window</span>.sessionStorage.clear();<br><span class="hljs-comment">//删除数据</span><br><span class="hljs-built_in">window</span>.sessionStorage.removeItem(<span class="hljs-string">&#x27;token&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
+
+<p>localStorage 在关闭浏览器后依然有效</p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-comment">//设置</span><br><span class="hljs-built_in">window</span>.localStorage.setItem(<span class="hljs-string">&#x27;token&#x27;</span>, token);<br><br><span class="hljs-comment">//获取</span><br><span class="hljs-built_in">window</span>.localStorage.getItem(<span class="hljs-string">&quot;token&quot;</span>)<br></code></pre></div></td></tr></table></figure>
+
+
             </div>
             <hr>
             <div>
@@ -315,7 +300,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/WeChat/">WeChat</a>
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
                     
                   </div>
                 
@@ -333,9 +320,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/11/%E5%89%8D%E7%AB%AF%E4%BF%9D%E5%AD%98token/">
+                      <a href="/2021/03/11/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E5%AD%98emoji%E8%A1%A8%E6%83%85/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">前端请求登录 获取token存取</span>
+                        <span class="hidden-mobile">MySQL数据库保存emoji表情</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -343,8 +330,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/09/nginx%E9%85%8D%E7%BD%AEhttps%E8%AF%81%E4%B9%A6/">
-                        <span class="hidden-mobile">Nginx部署SSL证书</span>
+                      <a href="/2021/03/09/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-4/">
+                        <span class="hidden-mobile">微信支付-会员升级</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>hexo Github里面Pages配置域名</title>
+    <link href="/2021/03/12/pages%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8D/"/>
+    <url>/2021/03/12/pages%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8D/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Github里面Pages配置域名"><a href="#Github里面Pages配置域名" class="headerlink" title="Github里面Pages配置域名"></a><font color="#027cd8">Github里面Pages配置域名</font></h2><p><code>前情提要</code></p><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">使用hexo搭建的个人博客 将其部署到 GitHub Pages上<br>使用xxx.github.io即可访问到<br>现更改 绑定域名<br>源域名: papyboy.github.io<br>现域名: bree.vip<br>注意: 码云的绑定域名需要付费啊 所以选择更改为GitHub(访问太慢)<br></code></pre></div></td></tr></table></figure><h2 id="1-在GitHub上创建一个仓库"><a href="#1-在GitHub上创建一个仓库" class="headerlink" title="1. 在GitHub上创建一个仓库"></a><font color="#027cd8">1. 在GitHub上创建一个仓库</font></h2><p>右上角 new repository 点击后如下图</p><p><img src="https://ps.ssl.qhmsg.com/t023f7556d0434efc92.jpg" alt="new repository"></p><p>创建好后 如下图 复制仓库地址</p><p><img src="https://ps.ssl.qhmsg.com/t024e56b25facdf0e07.jpg" alt="获取地址"></p><h2 id="2-域名解析-CNAME"><a href="#2-域名解析-CNAME" class="headerlink" title="2. 域名解析 CNAME"></a><font color="#027cd8">2. 域名解析 CNAME</font></h2><blockquote><p>这里使用腾讯云做示例 记录类型需要选择为 CNAME</p></blockquote><h5 id="找到云解析-注意-域名需要备案"><a href="#找到云解析-注意-域名需要备案" class="headerlink" title="找到云解析 注意:域名需要备案"></a>找到云解析 注意:域名需要备案</h5><p><img src="https://ps.ssl.qhmsg.com/t02a91b0679e0044520.jpg" alt="云解析"></p><h5 id="点击解析"><a href="#点击解析" class="headerlink" title="点击解析"></a>点击解析</h5><p><img src="https://ae01.alicdn.com/kf/U2e5a22fe9c28412f89be694155dbb44eX.jpg" alt="解析"></p><h5 id="点击添加记录"><a href="#点击添加记录" class="headerlink" title="点击添加记录"></a>点击添加记录</h5><p><img src="https://ae01.alicdn.com/kf/U0e06dac75f05475fa719195b3bb54e91r.jpg" alt="添加记录"></p><h5 id="注意-当前为将域名指向另一个域名-所以记录类型要选择CNAME"><a href="#注意-当前为将域名指向另一个域名-所以记录类型要选择CNAME" class="headerlink" title="注意 当前为将域名指向另一个域名 所以记录类型要选择CNAME"></a>注意 当前为将域名指向另一个域名 所以记录类型要选择CNAME</h5><p><img src="https://ae01.alicdn.com/kf/U0fa317dc25da45f2a26098052f5ce07fj.jpg" alt="CNAME"></p><blockquote><p>记录值为xxx.github.io 解析需要等待10-15分钟左右</p></blockquote><h2 id="3-仓库里面添加文件CNAME"><a href="#3-仓库里面添加文件CNAME" class="headerlink" title="3. 仓库里面添加文件CNAME"></a><font color="#027cd8">3. 仓库里面添加文件CNAME</font></h2><h5 id="在setting里面-找到GitHub-Pages-配置域名这样会自动生成-CNAME文件"><a href="#在setting里面-找到GitHub-Pages-配置域名这样会自动生成-CNAME文件" class="headerlink" title="在setting里面 找到GitHub Pages 配置域名这样会自动生成 CNAME文件"></a>在setting里面 找到GitHub Pages 配置域名这样会自动生成 CNAME文件</h5><p><img src="https://ae01.alicdn.com/kf/Uc9a7cb9745354b83a7860873588ded36X.jpg" alt="配置CNAME文件"></p><h2 id="4-hexo静态博客提交"><a href="#4-hexo静态博客提交" class="headerlink" title="4. hexo静态博客提交"></a><font color="#027cd8">4. hexo静态博客提交</font></h2><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 替换仓库地址后 依次执行命令</span><br>hexo g<br>hexo d<br><span class="hljs-meta">#</span><span class="bash"> 后打开域名 就能访问啦</span><br></code></pre></div></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Hexo</category>
+      
+      <category>Themes</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>MySQL数据库保存emoji表情</title>
     <link href="/2021/03/11/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E5%AD%98emoji%E8%A1%A8%E6%83%85/"/>
     <url>/2021/03/11/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E5%AD%98emoji%E8%A1%A8%E6%83%85/</url>

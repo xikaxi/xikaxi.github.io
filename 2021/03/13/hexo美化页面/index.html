@@ -20,7 +20,7 @@
   <meta name="author" content="玩世不恭&#39;s">
   <meta name="keywords" content="">
   
-  <title>微信登录-扫码绑定用户 一) - 玩世不恭&#39;s blog</title>
+  <title>hexo fluid美化页面效果 - 玩世不恭&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -208,7 +208,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="微信登录-扫码绑定用户 一)">
+            <span class="h2" id="subtitle" title="hexo fluid美化页面效果">
               
             </span>
 
@@ -223,8 +223,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-08 18:17" pubdate>
-        2021年3月8日 晚上
+      <time datetime="2021-03-13 12:11" pubdate>
+        2021年3月13日 中午
       </time>
     </span>
   
@@ -235,7 +235,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      806 字
+      640 字
     </span>
   
 
@@ -245,7 +245,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      10
        分钟
     </span>
   
@@ -283,94 +283,29 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">微信登录-扫码绑定用户 一)</h1>
+            <h1 style="display: none">hexo fluid美化页面效果</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月11日 下午
+                  本文最后更新于：2021年3月13日 中午
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="微信登录与绑定用户☟"><a href="#微信登录与绑定用户☟" class="headerlink" title="微信登录与绑定用户☟"></a><font color="#008080">微信登录与绑定用户☟</font></h2><p><strong><code>前情提要</code> <a href="#">☟</a></strong></p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">用户使用手机号码登录后 校验是否已经绑定微信号<br>微信扫码登录的用户 校验是否已经绑定手机号码<br>本章使用: python3.6 django MySQL<br>微信扫码登陆 校验是否已经绑定微信/手机号码<br></code></pre></div></td></tr></table></figure>
-
-<p><img src="https://p.pstatp.com/origin/137340002b9a1dcb33085" srcset="/img/loading.gif" alt="流程图"></p>
-<h2 id="校验是否已经绑定过手机号码-微信☟"><a href="#校验是否已经绑定过手机号码-微信☟" class="headerlink" title="校验是否已经绑定过手机号码/微信☟"></a><font color="#008080">校验是否已经绑定过手机号码/微信☟</font></h2><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-<th>备注</th>
-<th>请求方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>参考路由</td>
-<td><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/WxOrUser/">http://127.0.0.1:8000/WxOrUser/</a></td>
-<td>校验是否已经绑定过手机号码或微信</td>
-<td>GET</td>
-</tr>
-</tbody></table>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WeXinBindView</span>(<span class="hljs-params">APIView</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;校验是否已经绑定过微信--手机号&quot;&quot;&quot;</span><br>    authentication_classes = [MyBaseAuthentication, ]  <span class="hljs-comment"># jwt_token认证用户</span><br>    <br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span>(<span class="hljs-params">self, request</span>):</span><br>        user = is_master(request.user)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> re.match(<span class="hljs-string">r&#x27;^1[3-9]\d&#123;9&#125;$&#x27;</span>, user.mobile):<br>            <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;您的账号尚未绑定手机号,请先绑定手机号&#x27;</span>&#125;)<br>        <span class="hljs-keyword">elif</span> user.useropenid <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>            <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;您的账号尚未绑定微信,请先绑定微信&#x27;</span>&#125;)<br>        <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.OK&#125;)<br></code></pre></div></td></tr></table></figure>
+              <h2 id="Hexo-Fluid美化页面"><a href="#Hexo-Fluid美化页面" class="headerlink" title="Hexo Fluid美化页面"></a><font color="#027cd8">Hexo Fluid美化页面</font></h2><p><code>前情提要</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 页面添加站点运行时间</span><br><span class="hljs-comment"># 美化鼠标</span><br><span class="hljs-comment"># 动态线条</span><br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="微信登录成功–绑定手机号码☟"><a href="#微信登录成功–绑定手机号码☟" class="headerlink" title="微信登录成功–绑定手机号码☟"></a><font color="#008080">微信登录成功–绑定手机号码☟</font></h2><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-<th>备注</th>
-<th>请求方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>参考路由</td>
-<td><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/wx_mobile/">http://127.0.0.1:8000/wx_mobile/</a></td>
-<td>微信登录的用户-绑定手机号码</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>mobile</td>
-<td>13456789011</td>
-<td>手机号码</td>
-<td></td>
-</tr>
-</tbody></table>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WeChatBindMobileView</span>(<span class="hljs-params">APIView</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;微信登录成功--绑定手机号码&quot;&quot;&quot;</span><br>    authentication_classes = [MyBaseAuthentication, ]  <span class="hljs-comment"># jwt_token认证用户</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">post</span>(<span class="hljs-params">self, request</span>):</span><br>        user = is_master(request.user)<br>        mobile = request.POST.get(<span class="hljs-string">&#x27;mobile&#x27;</span>)<br>        password = request.POST.get(<span class="hljs-string">&#x27;password&#x27;</span>)  <span class="hljs-comment"># 改密码将在用户手机号登录的时候使用</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">all</span>([mobile, password]):<br>            <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.PARAMERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;缺少手机号或密码&#x27;</span>&#125;)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> re.match(<span class="hljs-string">r&#x27;^1[3-9]\d&#123;9&#125;$&#x27;</span>, mobile):<br>            <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.USERERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;请输入正确的手机号码&#x27;</span>&#125;)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> re.match(<span class="hljs-string">r&#x27;^[0-9a-zA-Z]&#123;8,20&#125;$&#x27;</span>, password):<br>            <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.PWDERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;请输入8-20位的数字字母密码&#x27;</span>&#125;)<br>        user.mobile = mobile<br>        user.password = make_password(password, <span class="hljs-string">&#x27;pbkdf2_sha256&#x27;</span>)<br>        user.save()<br>        <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.OK, <span class="hljs-string">&#x27;token&#x27;</span>: user.jwt_token, <span class="hljs-string">&#x27;mobile&#x27;</span>: mobile&#125;)<br></code></pre></div></td></tr></table></figure>
+<h2 id="1-主题-config-yml文件中修改custom-js与custom-css"><a href="#1-主题-config-yml文件中修改custom-js与custom-css" class="headerlink" title="1. 主题_config.yml文件中修改custom_js与custom_css"></a><font color="#027cd8">1. 主题_config.yml文件中修改custom_js与custom_css</font></h2><h4 id="custom-js-修改前-修改后"><a href="#custom-js-修改前-修改后" class="headerlink" title="custom_js 修改前 / 修改后"></a><font color="#4fb8fe">custom_js 修改前 / 修改后</font></h4><figure class="highlight yml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yml"><span class="hljs-comment"># 修改前</span><br><span class="hljs-attr">custom_js:</span><br><span class="hljs-comment"># 指定自定义 .css 文件路径，用法和 custom_js 相同</span><br><span class="hljs-comment"># The usage is the same as custom_js</span><br><br><span class="hljs-comment"># 修改后</span><br><span class="hljs-attr">custom_js:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/caidai.js</span> <span class="hljs-comment"># 动态彩带</span><br>  <span class="hljs-comment"># - //cdn.jsdelivr.net/gh/bynotes/texiao/source/js/jingtaisidai.js # 静态彩带</span><br>  <span class="hljs-comment"># - //cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js # 动态黑色线条</span><br>  <span class="hljs-comment"># - //cdn.jsdelivr.net/gh/bynotes/texiao/source/js/daxuehua.js # 大雪花飘落</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js</span> <span class="hljs-comment"># 鼠标跟随小星星</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/timeDate.js</span> <span class="hljs-comment"># 运行时间</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js</span>  <span class="hljs-comment">#/APlayer#/APlayer依赖</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">//cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js</span>  <span class="hljs-comment">#/APlayer依赖</span><br><br><span class="hljs-comment"># 指定自定义 .css 文件路径，用法和 custom_js 相同</span><br><span class="hljs-comment"># The usage is the same as custom_js</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="custom-css-修改前-修改后"><a href="#custom-css-修改前-修改后" class="headerlink" title="custom_css 修改前 / 修改后"></a><font color="#4fb8fe">custom_css 修改前 / 修改后</font></h4><figure class="highlight yml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yml"><span class="hljs-comment"># 修改前</span><br><span class="hljs-attr">custom_css:</span><br><br><span class="hljs-comment"># 修改后</span><br><span class="hljs-attr">custom_css:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css</span> <span class="hljs-comment">#鼠标指针</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css</span> <span class="hljs-comment"># 滚动条颜色</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css</span> <span class="hljs-comment"># 头部打字机颜色效果渐变</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css</span>   <span class="hljs-comment">#/APlayer依赖</span><br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="手机号登录成功–绑定微信号☟"><a href="#手机号登录成功–绑定微信号☟" class="headerlink" title="手机号登录成功–绑定微信号☟"></a><font color="#008080">手机号登录成功–绑定微信号☟</font></h2><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>值</th>
-<th>备注</th>
-<th>请求方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>参考路由</td>
-<td><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/mobile_wx/">http://127.0.0.1:8000/mobile_wx/</a></td>
-<td>手机号登录的用户–绑定微信号</td>
-<td>GET</td>
-</tr>
-<tr>
-<td>code</td>
-<td>071xnUkl2wUPo64to1ol2MhKFY1xnUkZ</td>
-<td>用户扫码后的code值</td>
-<td></td>
-</tr>
-<tr>
-<td>state</td>
-<td>STATE</td>
-<td>默认STATE</td>
-<td></td>
-</tr>
-</tbody></table>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MobileBindWeChatView</span>(<span class="hljs-params">APIView</span>):</span><br>    authentication_classes = [MyBaseAuthentication, ]  <span class="hljs-comment"># jwt_token认证用户</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get</span>(<span class="hljs-params">self, request</span>):</span><br>        code = request.GET.get(<span class="hljs-string">&#x27;code&#x27;</span>)  <span class="hljs-comment"># 获取code值</span><br>        state = request.GET.get(<span class="hljs-string">&quot;state&quot;</span>)<br>        user = is_master(request.user)<br><br>        myurl = <span class="hljs-string">&quot;https://api.weixin.qq.com/sns/oauth2/access_token?appid=&quot;</span> \<br>        + AppID + <span class="hljs-string">&quot;&amp;secret=&quot;</span> + AppSecret + <span class="hljs-string">&quot;&amp;code=&quot;</span> + code + <span class="hljs-string">&quot;&amp;grant_type=authorization_code&quot;</span><br><br>        request = Request(myurl)<br>        html = urlopen(request)<br>        <span class="hljs-comment"># 获取数据</span><br>        data = html.read()<br>        strs = json.loads(data.decode())<br>        mytoken = strs[<span class="hljs-string">&quot;access_token&quot;</span>]<br>        myrhtoken = strs[<span class="hljs-string">&quot;refresh_token&quot;</span>]<br>        myopenid = strs[<span class="hljs-string">&quot;openid&quot;</span>]<br>        myunionid = strs[<span class="hljs-string">&quot;unionid&quot;</span>]<br>        <span class="hljs-comment"># 获取用户信息的api接口</span><br>        mytwourl = <span class="hljs-string">&quot;https://api.weixin.qq.com/sns/userinfo?access_token=&quot;</span> + mytoken + <span class="hljs-string">&quot;&amp;openid=&quot;</span> + myopenid + <span class="hljs-string">&quot;&amp;lang=zh_CN&quot;</span><br>        request2 = Request(mytwourl)<br>        html2 = urlopen(request2)<br>        data2 = html2.read()<br>        strs2 = json.loads(data2.decode())<br>        <span class="hljs-comment"># 下面是获取扫码者微信帐号完整信息</span><br>        useropenid = strs2[<span class="hljs-string">&quot;openid&quot;</span>]<br>        usernickname = strs2[<span class="hljs-string">&quot;nickname&quot;</span>]<br>        userheadimgurl = strs2[<span class="hljs-string">&quot;headimgurl&quot;</span>]<br>        userunionid = strs2[<span class="hljs-string">&quot;unionid&quot;</span>]<br>        user.useropenid = useropenid<br>        user.usernickname = usernickname<br>        user.userheadimgurl = userheadimgurl<br>        user.userunionid = userunionid<br>        user.state = state<br>        user.save()<br><br>        <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.OK, <span class="hljs-string">&#x27;token&#x27;</span>: user.jwt_token, <span class="hljs-string">&#x27;mobile&#x27;</span>: user.mobile&#125;)<br></code></pre></div></td></tr></table></figure>
+<h2 id="2-在网站页脚处-插入运行时间-找到footer-ejs"><a href="#2-在网站页脚处-插入运行时间-找到footer-ejs" class="headerlink" title="2. 在网站页脚处 插入运行时间 找到footer.ejs"></a><font color="#027cd8">2. 在网站页脚处 插入运行时间 找到footer.ejs</font></h2><h4 id="路径-主题文件下-layout-partial-footer-ejs"><a href="#路径-主题文件下-layout-partial-footer-ejs" class="headerlink" title="路径 主题文件下/layout/_partial/footer.ejs"></a><font color="#4fb8fe">路径 主题文件下/layout/_partial/footer.ejs</font></h4><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">&lt;footer class=&quot;text-center mt-5 py-3&quot;&gt;<br>  &lt;div class=&quot;footer-content&quot;&gt;<br>    &lt;%- theme.footer.content %&gt;<br>  &lt;/div&gt;<br>  &lt;%- partial(&#x27;_partial/statistics.ejs&#x27;) %&gt;<br>    &lt;%- partial(&#x27;_partial/beian.ejs&#x27;) %&gt;<br>      &lt;% if(theme.web_analytics.cnzz) &#123; %&gt;<br>        &lt;!-- cnzz Analytics Icon --&gt;<br>        &lt;span id=&quot;cnzz_stat_icon_&lt;%- theme.web_analytics.cnzz %&gt;&quot; style=&quot;display: none&quot;&gt;&lt;/span&gt;<br>        &lt;% &#125; %&gt;<br>&lt;/footer&gt;<br><br>&lt;!-- SCRIPTS --&gt;<br>&lt;%- partial(&#x27;_partial/scripts.ejs&#x27;) %&gt;<br>  &lt;center&gt;<br>    &lt;span id=&quot;timeDate&quot;&gt;载入天数...&lt;/span&gt;&lt;span id=&quot;times&quot;&gt;载入时分秒...&lt;/span&gt;<br>    &lt;script&gt;<br>      //运行时间bynote.cn<br>      var now = new Date();<br>      function createtime() &#123;<br>        var grt = new Date(&quot;8/15/2020 17:38:00&quot;);//在此处修改你的建站时间，格式：月/日/年 时:分:秒<br>        now.setTime(now.getTime() + 250);<br>        days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);<br>        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);<br>        if (String(hnum).length == 1) &#123; hnum = &quot;0&quot; + hnum; &#125; minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);<br>        mnum = Math.floor(minutes); if (String(mnum).length == 1) &#123; mnum = &quot;0&quot; + mnum; &#125;<br>        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);<br>        snum = Math.round(seconds); if (String(snum).length == 1) &#123; snum = &quot;0&quot; + snum; &#125;<br>        document.getElementById(&quot;timeDate&quot;).innerHTML = &quot;本站已运行 &quot; + dnum + &quot; 天 &quot;;<br>        document.getElementById(&quot;times&quot;).innerHTML = hnum + &quot; 小时 &quot; + mnum + &quot; 分 &quot; + snum + &quot; 秒&quot;;<br>      &#125;<br>      setInterval(&quot;createtime()&quot;, 250);<br>    &lt;/script&gt;<br>  &lt;/center&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+
             </div>
             <hr>
             <div>
@@ -379,7 +314,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/WeChat/">WeChat</a>
+                      <a class="hover-with-bg" href="/categories/Hexo/">Hexo</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Hexo/Themes/">Themes</a>
                     
                   </div>
                 
@@ -397,18 +334,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/08/%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95-3/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">微信登录-扫码绑定用户 二)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/08/%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95-1/">
-                        <span class="hidden-mobile">微信登录-扫码登录</span>
+                      <a href="/2021/03/12/pages%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8D/">
+                        <span class="hidden-mobile">hexo Github里面Pages配置域名</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

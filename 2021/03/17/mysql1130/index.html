@@ -20,9 +20,25 @@
   <meta name="author" content="玩世不恭&#39;s">
   <meta name="keywords" content="">
   
-  <title>友链 - 玩世不恭&#39;s blog</title>
+  <title>MySQL连接报错 1130问题 - 玩世不恭&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -57,7 +73,7 @@
 
 
 <body>
-  <header style="height: 120vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -187,22 +203,68 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://ae01.alicdn.com/kf/Ua451b50aebe54f2b91ccdb402709dd65C.jpg') no-repeat center center;
+         style="background: url('https://ae01.alicdn.com/kf/Uceecb778c2e04c9a89dd0bfa911a0e63w.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="友情链接">
+            <span class="h2" id="subtitle" title="MySQL连接报错 1130问题">
               
             </span>
 
             
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      玩世不恭's
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-17 16:49" pubdate>
+        2021年3月17日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      277 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
           
         </div>
       </div>
@@ -211,82 +273,94 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          style=margin-top:0>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL连接报错 1130问题</h1>
+            
+              <p class="note note-info">
                 
+                  本文最后更新于：2021年3月17日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="MySQL连接报错1130⭐⭐"><a href="#MySQL连接报错1130⭐⭐" class="headerlink" title="MySQL连接报错1130⭐⭐"></a><font color="#00AA00">MySQL连接报错1130⭐⭐</font></h2><p><code>问题描述</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">通过Navicat for MySQL远程连接的时候报错mysql 1130的解决方法<br>错误代码是1130，ERROR 1130: Host 1.2.7.0 is not allowed to connect to this MySQL server<br>猜想是无法给远程连接的用户权限问题。<br></code></pre></div></td></tr></table></figure>
 
-<div class="row links">
-  
-    
-    <div class="card col-lg-4 col-md-6 col-sm-12">
-      <a href="https://www.bree.vip/" class="card-body hover-with-bg" target="_blank" rel="noopener">
-        <div class="card-content">
-          
-            <div class="link-avatar my-auto">
-              <img src="https://ps.ssl.qhmsg.com/t02b29985cb360f6782.jpg" alt="Rudy图床" onerror="this.onerror=null; this.src=this.srcset='https://ae01.alicdn.com/kf/Ud18adc8e512c40fba7c7839bc85607a4h.jpg'"/>
+<p><code>问题解决描述</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">在服务器登入mysql后，更改 “mysql” 数据库里的 “user” 表里的 “host” 项，从”localhost”改称&#x27;%&#x27;。<br>下面是用SQL语句解决问题：<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="SQL语句解决问题⭐⭐"><a href="#SQL语句解决问题⭐⭐" class="headerlink" title="SQL语句解决问题⭐⭐"></a><font color="#00AA00">SQL语句解决问题⭐⭐</font></h2><figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">mysql <span class="hljs-operator">-</span>uroot <span class="hljs-operator">-</span>p<br><br>use mysql;<br><br><span class="hljs-keyword">select</span> <span class="hljs-string">&#x27;host&#x27;</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> <span class="hljs-keyword">user</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;root&#x27;</span>;<br><br>update <span class="hljs-keyword">user</span> <span class="hljs-keyword">set</span> host <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;%&#x27;</span> <span class="hljs-keyword">where</span> <span class="hljs-keyword">user</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;root&#x27;</span>;<br><br>flush privileges<br><br><span class="hljs-keyword">select</span> <span class="hljs-string">&#x27;host&#x27;</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> <span class="hljs-keyword">user</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;root&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p><code>解析SQL语句</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">第一句是以权限用户root登录<br>第二句：选择mysql库<br>第三句：查看mysql库中的user表的host值（即可进行连接访问的主机/IP名称）<br>第四句：修改host值（以通配符%的内容增加主机/IP地址），当然也可以直接增加IP地址<br>第五句：刷新MySQL的系统权限相关表<br>第六句：再重新查看user表时，有修改。。<br>重起mysql服务即可完成。<br></code></pre></div></td></tr></table></figure>
+
+
             </div>
-          
-          <div class="link-text">
-            <div class="link-title">Rudy图床</div>
-            <div class="link-intro">\手动滑稽</div>
-          </div>
-        </div>
-      </a>
-    </div>
-  
-    
-    <div class="card col-lg-4 col-md-6 col-sm-12">
-      <a href="http://pentester.qihoo.info/" class="card-body hover-with-bg" target="_blank" rel="noopener">
-        <div class="card-content">
-          
-            <div class="link-avatar my-auto">
-              <img src="https://ps.ssl.qhmsg.com/t02c3bc2fc36d21f90a.jpg" alt="清风明月" onerror="this.onerror=null; this.src=this.srcset='https://ae01.alicdn.com/kf/Ud18adc8e512c40fba7c7839bc85607a4h.jpg'"/>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/17/django-celery/">
+                        <span class="hidden-mobile">Django Celery的使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
             </div>
-          
-          <div class="link-text">
-            <div class="link-title">清风明月</div>
-            <div class="link-intro">\手动滑稽</div>
-          </div>
-        </div>
-      </a>
-    </div>
-  
-    
-    <div class="card col-lg-4 col-md-6 col-sm-12">
-      <a href="https://misaka20000.gitee.io" class="card-body hover-with-bg" target="_blank" rel="noopener">
-        <div class="card-content">
-          
-            <div class="link-avatar my-auto">
-              <img src="/img/avatar.png" alt="misaka" onerror="this.onerror=null; this.src=this.srcset='https://ae01.alicdn.com/kf/Ud18adc8e512c40fba7c7839bc85607a4h.jpg'"/>
-            </div>
-          
-          <div class="link-text">
-            <div class="link-title">misaka</div>
-            <div class="link-intro">\手动滑稽</div>
-          </div>
-        </div>
-      </a>
-    </div>
-  
-</div>
 
-
-  <!-- Custom -->
-  <div class="custom mx-auto">
-    <hr><p>在下方留言申请加入我的友链，按如下格式提供信息：</p><ul><li>博客名：Rudy</li><li>简介：Rudy图床</li><li>链接：https://www.bree.vip</li><li>图片：https://www.bree.vip/static/image/favicon.ico</li></ul>
-  </div>
-
-
-
-  <!-- Comments -->
-  <article class="comments" id="comments">
-    
-    
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
   <div id="vcomments"></div>
   <script type="text/javascript">
     Fluid.utils.waitElementVisible('vcomments', function() {
@@ -313,14 +387,27 @@
   </noscript>
 
 
-  </article>
-
-
-              </div>
-            </div>
-          </div>
+              </article>
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -427,9 +514,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
@@ -471,6 +564,45 @@
 
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
 
 
 

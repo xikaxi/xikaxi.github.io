@@ -1845,7 +1845,23 @@ note-default {
   object-fit: cover;
   -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+
+  /* 鼠标经过头像旋转360度 */
+  -webkit-transition: -webkit-transform 1.0s ease-out;
+  -moz-transition: -moz-transform 1.0s ease-out;
+  transition: transform 1.0s ease-out;
 }
+
+.about-avatar img:hover {
+  /* 鼠标经过停止头像旋转 
+  -webkit-animation-play-state:paused;
+  animation-play-state:paused;*/
+  /* 鼠标经过头像旋转360度 */
+  -webkit-transform: rotateZ(360deg);
+  -moz-transform: rotateZ(360deg);
+  transform: rotateZ(360deg);
+}
+
 .about-info > div {
   margin-bottom: 0.5rem;
 }
@@ -1961,7 +1977,26 @@ note-default {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   object-fit: cover;
+  
+   -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+
+  /* 鼠标经过头像旋转360度 */
+  -webkit-transition: -webkit-transform 1.0s ease-out;
+  -moz-transition: -moz-transform 1.0s ease-out;
+  transition: transform 1.0s ease-out;
 }
+
+.link-avatar img:hover {
+  /* 鼠标经过停止头像旋转 
+  -webkit-animation-play-state:paused;
+  animation-play-state:paused;*/
+  /* 鼠标经过头像旋转360度 */
+  -webkit-transform: rotateZ(360deg);
+  -moz-transform: rotateZ(360deg);
+  transform: rotateZ(360deg);
+}
+
 .link-text {
   flex: 1;
   display: grid;

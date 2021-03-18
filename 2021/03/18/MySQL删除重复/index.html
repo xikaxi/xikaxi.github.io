@@ -1,0 +1,729 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://ae01.alicdn.com/kf/U9640f5f53a254d3ea8eb3d5e6b14d500J.jpg">
+  <link rel="icon" href="https://ae01.alicdn.com/kf/U9640f5f53a254d3ea8eb3d5e6b14d500J.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="">
+  
+  <meta name="author" content="玩世不恭&#39;s">
+  <meta name="keywords" content="">
+  
+  <title>MySQL 删除重复数据 多条件过滤删除 - 玩世不恭&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>玩世不恭's</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/playlist/">
+                <i class="iconfont icon-music"></i>
+                music
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.bree.vip/">
+                <i class="iconfont icon-images"></i>
+                图床
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ae01.alicdn.com/kf/Uceecb778c2e04c9a89dd0bfa911a0e63w.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MySQL 删除重复数据 多条件过滤删除">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      玩世不恭's
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-18 15:20" pubdate>
+        2021年3月18日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      35
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL 删除重复数据 多条件过滤删除</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年3月18日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="MySQL数据库保存重复值-去除重复值⭐⭐⭐"><a href="#MySQL数据库保存重复值-去除重复值⭐⭐⭐" class="headerlink" title="MySQL数据库保存重复值 去除重复值⭐⭐⭐"></a><font color="#00AA00">MySQL数据库保存重复值 去除重复值⭐⭐⭐</font></h2><p><code>开发提要</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">数据导入时间太慢 重复计算数据库是否存在重复数据<br>如果重复 则跳过 否则就创建 但是这样会出现数据量大的时候 时间缓慢<br>在添加的时候 可以不校验 在后面异步操作数据库 自动删除重复的数据<br>并保留id值最大<span class="hljs-operator">/</span>最小的数据<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="实战演示-创建数据库及操作⭐⭐⭐"><a href="#实战演示-创建数据库及操作⭐⭐⭐" class="headerlink" title="实战演示 创建数据库及操作⭐⭐⭐"></a><font color="#00AA00">实战演示 创建数据库及操作⭐⭐⭐</font></h2><ol>
+<li>创建数据库 并 use</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> database 数据库名称(sql_data);<br>Query OK, <span class="hljs-number">1</span> <span class="hljs-type">row</span> affected (<span class="hljs-number">0.00</span> sec)<br><br>use sql_data;<br></code></pre></div></td></tr></table></figure>
+
+<ol start="2">
+<li>创建数据表</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `asin_keyword_info`  (<br>  `id` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) UNSIGNED <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT,<br>  `keywordinfo_name` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8 <span class="hljs-keyword">COLLATE</span> utf8_general_ci <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;关键词名字&#x27;</span>,<br>  `search_trend` longtext <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8 <span class="hljs-keyword">COLLATE</span> utf8_general_ci <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;月趋势&#x27;</span>,<br>  `purchase` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;月购买量&#x27;</span>,<br>  `search_volume` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;月搜索量&#x27;</span>,<br>  `search_hot` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>  `results` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;竞品数量&#x27;</span>,<br>  `cvr` <span class="hljs-type">decimal</span>(<span class="hljs-number">10</span>, <span class="hljs-number">2</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;购买率&#x27;</span>,<br>  `quality` <span class="hljs-type">decimal</span>(<span class="hljs-number">10</span>, <span class="hljs-number">2</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;质量系数&#x27;</span>,<br>  `site_foreign` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) UNSIGNED <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>  `user_foreign` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>  `search_cate` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) UNSIGNED <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;添加哪个分类&#x27;</span>,<br>  `asin_foreign` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) UNSIGNED <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>  `create_time` datetime(<span class="hljs-number">6</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">ON</span> UPDATE <span class="hljs-built_in">CURRENT_TIMESTAMP</span>(<span class="hljs-number">6</span>),<br>  `update_time` datetime(<span class="hljs-number">6</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">ON</span> UPDATE <span class="hljs-built_in">CURRENT_TIMESTAMP</span>(<span class="hljs-number">6</span>),<br>  `is_delete` tinyint(<span class="hljs-number">10</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span>,<br>  `is_sub` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> COMMENT <span class="hljs-string">&#x27;子分类&#x27;</span>,<br>  <span class="hljs-keyword">PRIMARY</span> KEY (`id`) <span class="hljs-keyword">USING</span> BTREE,<br>  INDEX `foreign_asin`(`asin_foreign`) <span class="hljs-keyword">USING</span> BTREE,<br>  INDEX `search_cate_id`(`search_cate`) <span class="hljs-keyword">USING</span> BTREE,<br>  INDEX `user_id`(`user_foreign`) <span class="hljs-keyword">USING</span> BTREE,<br>  INDEX `site_id_fore`(`site_foreign`) <span class="hljs-keyword">USING</span> BTREE<br>) ENGINE <span class="hljs-operator">=</span> InnoDB AUTO_INCREMENT <span class="hljs-operator">=</span> <span class="hljs-number">7659761</span> <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> <span class="hljs-operator">=</span> utf8 <span class="hljs-keyword">COLLATE</span> <span class="hljs-operator">=</span> utf8_general_ci ROW_FORMAT <span class="hljs-operator">=</span> <span class="hljs-keyword">Dynamic</span>;<br></code></pre></div></td></tr></table></figure>
+
+<ol start="3">
+<li>添加数据 总共5条数据</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> `asin_keyword_info` <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;solar pir led security light1&#x27;</span>, <span class="hljs-string">&#x27;[&#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202005</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202006</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202007</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202008</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202009</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202010</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202011</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202012</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202101</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;]&#x27;</span>, <span class="hljs-number">172</span>, <span class="hljs-number">3815</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-number">10000</span>, <span class="hljs-number">0.05</span>, <span class="hljs-number">0.95</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;2021-03-18 14:07:33.199221&#x27;</span>, <span class="hljs-string">&#x27;2021-03-18 14:07:33.199221&#x27;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> `asin_keyword_info` <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;solar pir led security light1&#x27;</span>, <span class="hljs-string">&#x27;[&#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202005</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202006</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202007</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202008</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202009</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202010</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202011</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202012</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202101</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;]&#x27;</span>, <span class="hljs-number">172</span>, <span class="hljs-number">3815</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-number">10000</span>, <span class="hljs-number">0.05</span>, <span class="hljs-number">0.95</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;2021-03-18 14:07:41.870335&#x27;</span>, <span class="hljs-string">&#x27;2021-03-18 14:07:41.870335&#x27;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> `asin_keyword_info` <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">3</span>, <span class="hljs-string">&#x27;solar pir led security light1&#x27;</span>, <span class="hljs-string">&#x27;[&#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202005</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202006</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202007</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202008</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202009</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202010</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202011</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202012</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202101</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;]&#x27;</span>, <span class="hljs-number">172</span>, <span class="hljs-number">3815</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-number">10000</span>, <span class="hljs-number">0.05</span>, <span class="hljs-number">0.95</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;2021-03-18 13:28:09.365996&#x27;</span>, <span class="hljs-string">&#x27;2021-03-18 13:28:09.365996&#x27;</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">NULL</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> `asin_keyword_info` <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">4</span>, <span class="hljs-string">&#x27;solar pir led security light1&#x27;</span>, <span class="hljs-string">&#x27;[&#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202005</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202006</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202007</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202008</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202009</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202010</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202011</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202012</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202101</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;]&#x27;</span>, <span class="hljs-number">172</span>, <span class="hljs-number">3815</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-number">10000</span>, <span class="hljs-number">0.05</span>, <span class="hljs-number">0.95</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;2021-03-18 13:28:09.365996&#x27;</span>, <span class="hljs-string">&#x27;2021-03-18 13:28:09.365996&#x27;</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">NULL</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> `asin_keyword_info` <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">5</span>, <span class="hljs-string">&#x27;solar pir led security light1&#x27;</span>, <span class="hljs-string">&#x27;[&#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202005</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202006</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202007</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202008</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202009</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202010</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202011</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202012</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;, &#123;\&#x27;</span><span class="hljs-keyword">month</span>\<span class="hljs-string">&#x27;: \&#x27;</span><span class="hljs-number">202101</span>\<span class="hljs-string">&#x27;, \&#x27;</span>searches\<span class="hljs-string">&#x27;: 0&#125;]&#x27;</span>, <span class="hljs-number">172</span>, <span class="hljs-number">3815</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-number">10000</span>, <span class="hljs-number">0.05</span>, <span class="hljs-number">0.95</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;2021-03-18 13:28:09.365996&#x27;</span>, <span class="hljs-string">&#x27;2021-03-18 13:28:09.365996&#x27;</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">NULL</span>);<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="SQL的编写⭐⭐⭐"><a href="#SQL的编写⭐⭐⭐" class="headerlink" title="SQL的编写⭐⭐⭐"></a><font color="#00AA00">SQL的编写⭐⭐⭐</font></h2><blockquote>
+<p>在不确定SQL语句写的对不对的情况下 建议先用查询语句 捋一下思路</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>作用</th>
+<th>是否需要Y/N</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>keywordinfo_name</td>
+<td>关键词名称/会出现重复的</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>site_foreign</td>
+<td>站点关联</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>user_foreign</td>
+<td>用户关联</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>search_cate</td>
+<td>分类关联</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>is_sub</td>
+<td>二级分类关联</td>
+<td>Y</td>
+</tr>
+</tbody></table>
+<ol>
+<li>使用sql语句查询重复的数据</li>
+</ol>
+<p>⭐ 数据查询为null的时候 is NULL</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> keywordinfo_name <span class="hljs-keyword">in</span><br>	(<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> <br> 		keywordinfo_name <span class="hljs-keyword">having</span> <span class="hljs-built_in">count</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>) <span class="hljs-keyword">and</span><br> 			site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub <span class="hljs-keyword">is</span> <span class="hljs-keyword">NULL</span><br> <br><span class="hljs-comment">-- 上述语句 查询关键词名称 在表中出现了多少 并且 是在哪个站点 哪个用户 哪个分类 子分类为null的时候</span><br></code></pre></div></td></tr></table></figure>
+
+<ol start="2">
+<li>根据上述查询语句 反写删除语句</li>
+</ol>
+<p>⭐ 删除的时候 不能对当前操作的表进行修改 否则会报错</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-comment">-- 错误语法</span><br><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> keywordinfo_name <span class="hljs-keyword">in</span> <br>	(<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <br>     	<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>)<br><br><span class="hljs-operator">&gt;</span> <span class="hljs-number">1093</span> <span class="hljs-operator">-</span> You can<span class="hljs-string">&#x27;t specify target table &#x27;</span>asin_keyword_info<span class="hljs-string">&#x27; for update in FROM clause</span><br><span class="hljs-string">&gt; 时间: 0s</span><br></code></pre></div></td></tr></table></figure>
+
+<p>⭐⭐不能将直接查处来的数据当做删除数据的条件，我们应该先把查出来的数据当作新的，然后再作为条件进行删除功能</p>
+<ol start="3">
+<li>当不想保存重复的数据的时候(不是我们想要的结果)</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> keywordinfo_name <span class="hljs-keyword">in</span> <br>	(<span class="hljs-keyword">select</span> k.keywordinfo_name <span class="hljs-keyword">from</span> <br>		(<span class="hljs-keyword">SELECT</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> keywordinfo_name <span class="hljs-keyword">in</span> <br>			(<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>)<br>					<span class="hljs-keyword">and</span> site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub <span class="hljs-keyword">is</span> <span class="hljs-keyword">NULL</span><br>		)<br>	k)<br><br><span class="hljs-comment">-- 上述语句 删除重复的 不保留最大id/最小id</span><br></code></pre></div></td></tr></table></figure>
+
+<ol start="4">
+<li>条件只满足max / min 的时候 (不是我们想要的结果)</li>
+</ol>
+<p>⭐⭐当条件只满足了 max / min的时候 会将其余重复的删除 只保留最大/最小id</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> keywordinfo_name <span class="hljs-keyword">in</span><br>(<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <br>		<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>) e) <span class="hljs-keyword">AND</span> id <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> <br>(<span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> <span class="hljs-built_in">max</span>(id) <span class="hljs-keyword">as</span> id <span class="hljs-keyword">from</span> asin_keyword_info <br>		<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>) t) <br>			<span class="hljs-keyword">and</span> site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub<span class="hljs-operator">=</span><span class="hljs-number">1</span><br>			<br><span class="hljs-comment">-- 上述语句 最后and条件is_sub=1 没有被执行</span><br></code></pre></div></td></tr></table></figure>
+
+<ol start="5">
+<li>同时满足条件的时候 执行删除(我们想要的结果)</li>
+</ol>
+<p>⭐⭐⭐当条件满足 执行保留最大id值得数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> <br>search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub <span class="hljs-keyword">is</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">and</span> keywordinfo_name <span class="hljs-keyword">in</span><br>(<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <br>	<span class="hljs-keyword">where</span> site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub <span class="hljs-keyword">is</span> <span class="hljs-keyword">NULL</span><br>		<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>) e)<br><span class="hljs-keyword">AND</span> id <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> (<span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> <span class="hljs-built_in">max</span>(id) <span class="hljs-keyword">as</span> id <span class="hljs-keyword">from</span> asin_keyword_info <br>	<span class="hljs-keyword">where</span> site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub <span class="hljs-keyword">is</span> <span class="hljs-keyword">NULL</span><br>		<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>) t)<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="总览sql语句⭐⭐⭐⭐⭐"><a href="#总览sql语句⭐⭐⭐⭐⭐" class="headerlink" title="总览sql语句⭐⭐⭐⭐⭐"></a><font color="#00AA00">总览sql语句⭐⭐⭐⭐⭐</font></h2><figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-comment">-- 报错的语法</span><br><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> keywordinfo_name <span class="hljs-keyword">in</span> <br>	(<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>)<br><br><span class="hljs-comment">-- 查询重复的数据</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> keywordinfo_name <span class="hljs-keyword">in</span><br>(<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>) <span class="hljs-keyword">and</span> <br>		site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub<span class="hljs-operator">=</span><span class="hljs-number">1</span><br><br><span class="hljs-comment">-- 删除所有重复的 不保留 最大/最小id值</span><br><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> keywordinfo_name <span class="hljs-keyword">in</span> <br>	(<span class="hljs-keyword">select</span> k.keywordinfo_name <span class="hljs-keyword">from</span> <br>		(<span class="hljs-keyword">SELECT</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> keywordinfo_name <span class="hljs-keyword">in</span> <br>			(<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>)<br>					<span class="hljs-keyword">and</span> site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub <span class="hljs-keyword">is</span> <span class="hljs-keyword">NULL</span><br>		)<br>	k)<br><br><span class="hljs-comment">-- 不执行is_sub的条件语 只保留了最大/最小 其余条件未执行</span><br><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> keywordinfo_name <span class="hljs-keyword">in</span><br>(<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <br>		<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>) e) <span class="hljs-keyword">AND</span> id <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> <br>(<span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> <span class="hljs-built_in">max</span>(id) <span class="hljs-keyword">as</span> id <span class="hljs-keyword">from</span> asin_keyword_info <br>		<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>) t) <br>			<span class="hljs-keyword">and</span> site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub<span class="hljs-operator">=</span><span class="hljs-number">1</span><br><br><span class="hljs-comment">-- 满足所有条件的删除语句 保留最大/最小值</span><br><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> <br>search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub <span class="hljs-keyword">is</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">and</span> keywordinfo_name <span class="hljs-keyword">in</span><br>(<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <br>	<span class="hljs-keyword">where</span> site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub <span class="hljs-keyword">is</span> <span class="hljs-keyword">NULL</span><br>		<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>) e)<br><span class="hljs-keyword">AND</span> id <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> (<span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> <span class="hljs-built_in">max</span>(id) <span class="hljs-keyword">as</span> id <span class="hljs-keyword">from</span> asin_keyword_info <br>	<span class="hljs-keyword">where</span> site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub <span class="hljs-keyword">is</span> <span class="hljs-keyword">NULL</span><br>		<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>) t)<br><br><br></code></pre></div></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Python/MySQL/">MySQL</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/17/mysql1130/">
+                        <span class="hidden-mobile">MySQL连接报错 1130问题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "m4lFuQXnnTDGDinsm73TC8zv-gzGzoHsz",
+          app_key: "uGukCqwYSQwFXmED9y2i5Xdu",
+          placeholder: "牛逼的人 早已提出问题",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://www.bree.vip" target="_blank" rel="nofollow noopener"><span>Rudy</span></a> <i class="iconfont icon-love"></i> <a href="https://bree.vip" target="_self" rel="nofollow noopener"><span>玩世不恭</span></a> 
+  </div>
+  
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        晋ICP证2021005257号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021005257"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="https://ae01.alicdn.com/kf/Ua271b6001e4e4cf4995b23fad8401cba0.jpg" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>晋ICP备2021005257号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+      
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/caidai.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/timeDate.js"></script>
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+  <center>
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+      //运行时间bynote.cn
+      var now = new Date();
+      function createtime() {
+        var grt = new Date("8/15/2020 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if (String(hnum).length == 1) { hnum = "0" + hnum; } minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if (String(mnum).length == 1) { mnum = "0" + mnum; }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if (String(snum).length == 1) { snum = "0" + snum; }
+        document.getElementById("timeDate").innerHTML = "本站已运行 " + dnum + " 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+      setInterval("createtime()", 250);
+    </script>
+  </center>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/mikoto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>

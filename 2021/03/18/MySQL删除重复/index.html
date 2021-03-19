@@ -245,7 +245,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      35
+      36
        分钟
     </span>
   
@@ -287,7 +287,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月18日 下午
+                  本文最后更新于：2021年3月19日 下午
                 
               </p>
             
@@ -353,7 +353,7 @@
 <li>使用sql语句查询重复的数据</li>
 </ol>
 <p>⭐ 数据查询为null的时候 is NULL</p>
-<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> keywordinfo_name <span class="hljs-keyword">in</span><br>	(<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> <br> 		keywordinfo_name <span class="hljs-keyword">having</span> <span class="hljs-built_in">count</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>) <span class="hljs-keyword">and</span><br> 			site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub <span class="hljs-keyword">is</span> <span class="hljs-keyword">NULL</span><br> <br><span class="hljs-comment">-- 上述语句 查询关键词名称 在表中出现了多少 并且 是在哪个站点 哪个用户 哪个分类 子分类为null的时候</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> <br>	search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub <span class="hljs-keyword">is</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">and</span> keywordinfo_name <span class="hljs-keyword">in</span><br>		(<span class="hljs-keyword">select</span> keywordinfo_name <span class="hljs-keyword">from</span> asin_keyword_info <span class="hljs-keyword">where</span> <span class="hljs-keyword">where</span> site_foreign<span class="hljs-operator">=</span><span class="hljs-number">2</span> <br>			<span class="hljs-keyword">and</span> user_foreign<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> search_cate<span class="hljs-operator">=</span><span class="hljs-number">2</span> <span class="hljs-keyword">and</span> is_sub <span class="hljs-keyword">is</span> <span class="hljs-keyword">NULL</span><br>				<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> keywordinfo_name <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(keywordinfo_name) <span class="hljs-operator">&gt;</span> <span class="hljs-number">1</span>)<br> <br><span class="hljs-comment">-- 上述语句 查询关键词名称 在表中出现了多少 并且 是在哪个站点 哪个用户 哪个分类 子分类为null的时候</span><br></code></pre></div></td></tr></table></figure>
 
 <ol start="2">
 <li>根据上述查询语句 反写删除语句</li>

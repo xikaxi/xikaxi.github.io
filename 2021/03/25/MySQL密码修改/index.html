@@ -20,7 +20,7 @@
   <meta name="author" content="玩世不恭&#39;s">
   <meta name="keywords" content="">
   
-  <title>Django Celery的使用 - 玩世不恭&#39;s blog</title>
+  <title>Ubuntu16.04 下 MySQL5.7密码修改 - 玩世不恭&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -208,7 +208,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Django Celery的使用">
+            <span class="h2" id="subtitle" title="Ubuntu16.04 下 MySQL5.7密码修改">
               
             </span>
 
@@ -223,8 +223,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-17 16:08" pubdate>
-        2021年3月17日 下午
+      <time datetime="2021-03-25 10:16" pubdate>
+        2021年3月25日 上午
       </time>
     </span>
   
@@ -235,7 +235,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      369 字
     </span>
   
 
@@ -245,7 +245,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14
+      5
        分钟
     </span>
   
@@ -283,7 +283,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Django Celery的使用</h1>
+            <h1 style="display: none">Ubuntu16.04 下 MySQL5.7密码修改</h1>
             
               <p class="note note-info">
                 
@@ -292,109 +292,60 @@
               </p>
             
             <div class="markdown-body">
-              <h2 id="celery的简介"><a href="#celery的简介" class="headerlink" title="celery的简介"></a><font color="#00AA00">celery的简介</font></h2><p><code>celery简介</code></p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 任务调度器 Celery</span><br>celery是Python开发的一个分布式任务调度模块<br>Celery是一个简单，灵活，可靠的分布式系统，用于处理大量消息，同时为操作提供维护此类系统所需的工具。<br>它是一个任务队列，专注于实时处理，同时还支持任务调度。<br></code></pre></div></td></tr></table></figure>
-
-<p><code>celery的优点</code></p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-number">1.</span> 简单: celery的使用相对简单 并且在后期维护等操作都是比较方便的<br><span class="hljs-number">2.</span> 快速: 一个单进程的celery 每分钟可处理上百万个任务 在一些常用且等待时长比较大的时候 将会是最好的选择<br><span class="hljs-number">3.</span> 灵活: celery的组件 几乎都是可以被自定义以及扩展使用的<br><span class="hljs-number">4.</span> 高可用: 当任务执行过程中链接中断 那么celery会自动尝试重新执行任务 <br></code></pre></div></td></tr></table></figure>
-
-<p><code>celery的Broker</code></p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">当使用数据持久化的时候 选择RabbitMQ<br>abbitmq提供的队列和消息持久化机制更加稳定<br>当不在乎任务是否丢失的情况下 使用Redis<br>redis在服务崩溃的时候 可能导致数据丢失的情况<br></code></pre></div></td></tr></table></figure>
+              <h2 id="Ubuntu16-04下-MySQL密码忘记操作"><a href="#Ubuntu16-04下-MySQL密码忘记操作" class="headerlink" title="Ubuntu16.04下 MySQL密码忘记操作"></a><font color="#00BBFF">Ubuntu16.04下 MySQL密码忘记操作</font></h2><p><code>报错提要</code></p>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell">root@xswdsa:~<span class="hljs-comment"># mysql -uroot -p xxxxxxxxxxx</span><br>mysql: [<span class="hljs-type">Warning</span>] <span class="hljs-keyword">Using</span> a password on the <span class="hljs-keyword">command</span> line interface can be insecure.<br>ERROR <span class="hljs-number">1045</span> (<span class="hljs-number">28000</span>): Access denied <span class="hljs-keyword">for</span> user <span class="hljs-string">&#x27;root&#x27;</span><span class="hljs-string">@&#x27;localhost&#x27; (using password: YES)</span><br><span class="hljs-string"></span><br><span class="hljs-string">在更新密码后 还会出现上述问题...</span><br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="项目使用celery的操作记录版本"><a href="#项目使用celery的操作记录版本" class="headerlink" title="项目使用celery的操作记录版本"></a><font color="#00AA00">项目使用celery的操作记录版本</font></h2><table>
-<thead>
-<tr>
-<th>语言/模块</th>
-<th>版本</th>
-<th>安装方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Python</td>
-<td>3.6</td>
-<td><a target="_blank" rel="noopener" href="https://www.python.org/">DownloadPython</a></td>
-</tr>
-<tr>
-<td>celery</td>
-<td>3.1.22</td>
-<td>pip install celery==3.1.22 -i <a target="_blank" rel="noopener" href="https://pypi.douban.com/simple/">https://pypi.douban.com/simple/</a></td>
-</tr>
-<tr>
-<td>django</td>
-<td>1.11.11</td>
-<td>pip install django==1.11.11 -i <a target="_blank" rel="noopener" href="https://pypi.douban.com/simple/">https://pypi.douban.com/simple/</a></td>
-</tr>
-<tr>
-<td>django-celery</td>
-<td>3.1.17</td>
-<td></td>
-</tr>
-<tr>
-<td>redis</td>
-<td>2.10.6</td>
-<td>pip install redis==2.10.6 -i <a target="_blank" rel="noopener" href="https://pypi.douban.com/simple/">https://pypi.douban.com/simple/</a></td>
-</tr>
-<tr>
-<td>pymongo</td>
-<td>3.11.0</td>
-<td>pip install mongo -i <a target="_blank" rel="noopener" href="https://pypi.douban.com/simple/">https://pypi.douban.com/simple/</a></td>
-</tr>
-</tbody></table>
-<h2 id="celery里面-结合mongodb-redis"><a href="#celery里面-结合mongodb-redis" class="headerlink" title="celery里面 结合mongodb redis"></a><font color="#00AA00">celery里面 结合mongodb redis</font></h2><ol>
-<li>新建celery 任务文件</li>
+<h2 id="修改mysql-cnf文件"><a href="#修改mysql-cnf文件" class="headerlink" title="修改mysql.cnf文件"></a><font color="#00BBFF">修改mysql.cnf文件</font></h2><ol>
+<li>文件路径(Ubuntu16.04): /etc/mysql/mysql.conf.d/</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">import</span> pymongo<br><span class="hljs-keyword">from</span> celery <span class="hljs-keyword">import</span> Celery, platforms<br><span class="hljs-keyword">import</span> redis<br><br><span class="hljs-comment"># 定义当前模块的名称 以及消息队列的存储路径</span><br>redistrend = Celery(<br>    <span class="hljs-string">&#x27;redistrend&#x27;</span>,  <span class="hljs-comment"># 当前模块的名字</span><br>    broker=<span class="hljs-string">&#x27;redis://:密码@localhost:6379/12&#x27;</span>,  <span class="hljs-comment"># 消息队列的url</span><br>)<br><br><span class="hljs-comment"># 任务过期时间</span><br>redistrend.conf.update(<br>    result_expires=<span class="hljs-number">3600</span>,<br>)<br><br><span class="hljs-comment"># celery不能使用最高权限用户启动的时候 配置一下 C_FORCE_ROOT</span><br>platforms.C_FORCE_ROOT = <span class="hljs-literal">True</span><br><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell">root@xswdsa:~<span class="hljs-comment"># cd /etc/mysql/mysql.conf.d/</span><br><br>root@xswdsa:~<span class="hljs-comment"># ls</span><br>mysqld.cnf<br></code></pre></div></td></tr></table></figure>
 
 <ol start="2">
-<li>同文件下 配置mongodb 服务器配置</li>
+<li>更改MySQL.cnf文件 在文件最后面 添加跳过验证的代码</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># mongodb服务器的配置</span><br>CONN_ADDR1 = <span class="hljs-string">&#x27;d.com:9876&#x27;</span>  <span class="hljs-comment"># 公网</span><br>CONN_ADDR2 = <span class="hljs-string">&#x27;d.com:9876&#x27;</span>  <span class="hljs-comment"># 内网</span><br>REPLICAT_SET = <span class="hljs-string">&#x27;what</span><br><span class="hljs-string">username = &#x27;</span>ikwlamks<span class="hljs-string">&#x27;</span><br><span class="hljs-string">password = &#x27;</span>wajloselkzpp2la0<span class="hljs-string">&#x27;</span><br><span class="hljs-string">#  #获取mongoclient</span><br><span class="hljs-string">myclient = pymongo.MongoClient([CONN_ADDR2, CONN_ADDR1], replicaSet=REPLICAT_SET)</span><br><span class="hljs-string">#  #授权。 这里的user基于admin数据库授权。</span><br><span class="hljs-string">myclient.admin.authenticate(username, password)</span><br><span class="hljs-string">mydb = myclient[&quot;joiki&quot;] # 获取连接的集合名称</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell">root@xswdsa:~<span class="hljs-comment"># vim mysqld.cnf</span><br></code></pre></div></td></tr></table></figure>
 
 <ol start="3">
-<li>同文件下 创建任务函数</li>
+<li>添加语句 保存 退出</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-meta">@redistrend.task</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">redis_trend</span>(<span class="hljs-params">key, date_list, uid</span>):</span><br>    first_date, last_date = date_list<br>    first_date = datetime.datetime.strptime(first_date, <span class="hljs-string">&quot;%Y-%m-%d&quot;</span>)  <span class="hljs-comment"># 第一天</span><br>    last_date = datetime.datetime.strptime(last_date, <span class="hljs-string">&quot;%Y-%m-%d&quot;</span>)  <span class="hljs-comment"># 最后一天</span><br>    day_num = (last_date - first_date).days  <span class="hljs-comment"># 相隔几天</span><br>    rank_list = &#123;&#125;<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(day_num + <span class="hljs-number">1</span>):<br>        <span class="hljs-comment"># TODO 此处时间需要修改 本地测试windows--&gt; %Y-%#m-%#d 远程Linux--? %Y-%-m-%-d</span><br>        new_date = (first_date + datetime.timedelta(days=i)).strftime(<span class="hljs-string">&quot;%Y-%-m-%-d&quot;</span>)<br>        new_mycol = mydb[new_date]<br>        new_data = new_mycol.find(&#123;<span class="hljs-string">&#x27;search_key&#x27;</span>: &#123;<span class="hljs-string">&#x27;$regex&#x27;</span>: key&#125;&#125;).sort(<span class="hljs-string">&#x27;search_frequency&#x27;</span>)<br>        <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> new_data:<br>            <span class="hljs-keyword">if</span> data[<span class="hljs-string">&#x27;search_key&#x27;</span>] <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> rank_list:<br>                rank_list[data[<span class="hljs-string">&#x27;search_key&#x27;</span>]] = [&#123;<span class="hljs-string">&#x27;date&#x27;</span>: data[<span class="hljs-string">&#x27;dated&#x27;</span>], <span class="hljs-string">&#x27;rank&#x27;</span>: data[<span class="hljs-string">&#x27;search_frequency&#x27;</span>]&#125;]<br>            <span class="hljs-keyword">else</span>:<br>                rank_list[data[<span class="hljs-string">&#x27;search_key&#x27;</span>]].append(&#123;<span class="hljs-string">&#x27;date&#x27;</span>: data[<span class="hljs-string">&#x27;dated&#x27;</span>], <br>                                                      <span class="hljs-string">&#x27;rank&#x27;</span>:data[<span class="hljs-string">&#x27;search_frequency&#x27;</span>]&#125;)<br>    <span class="hljs-comment"># 数据写入redis</span><br>    r = redis.Redis(connection_pool=pool)<br>    pipe = r.pipeline()  <span class="hljs-comment"># 默认事务开启，具备原子性</span><br>    pipe.<span class="hljs-built_in">set</span>(<span class="hljs-string">&#x27;%s_%s_%s_%s&#x27;</span> % (key, date_list[<span class="hljs-number">0</span>], date_list[<span class="hljs-number">1</span>], uid), <span class="hljs-built_in">str</span>(rank_list), <span class="hljs-number">3</span> * <span class="hljs-number">24</span> * <span class="hljs-number">3600</span>)<br>    pipe.execute()<br>    <span class="hljs-keyword">return</span> rank_list<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">skip-grant</span><span class="hljs-literal">-tables</span><br></code></pre></div></td></tr></table></figure>
 
 <ol start="4">
-<li>在需要使用到的地方 调用异步调度器就可以了</li>
+<li>重启MySQL服务</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 注意传递参数的时候的格式 args=[xxx,]</span><br>redistrend.send_task(<span class="hljs-string">&quot;redistrend.redis_trend&quot;</span>, args=[key, date_list, user.<span class="hljs-built_in">id</span>])<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell">root@xswdsa:~<span class="hljs-comment"># sudo systemctl restart mysql.service</span><br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="在task文件路径开启celery"><a href="#在task文件路径开启celery" class="headerlink" title="在task文件路径开启celery"></a><font color="#00AA00">在task文件路径开启celery</font></h2><ol>
-<li>Windows下面的开启</li>
+<h2 id="重新设置密码验证"><a href="#重新设置密码验证" class="headerlink" title="重新设置密码验证"></a><font color="#00BBFF">重新设置密码验证</font></h2><ol>
+<li>重新登录MySQL服务</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">celery -A redistrend worker --loglevel=info<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">mysql</span> -uroot -p<br>Enter password:<br>Welcome to the MySQL monitor.  Commands end with ; <span class="hljs-attribute">or</span> \g.<br>Your MySQL connection id is <span class="hljs-number">20</span><br>Server version: <span class="hljs-number">5</span>.<span class="hljs-number">7</span>.<span class="hljs-number">30</span>-0ubuntu0.<span class="hljs-number">16</span>.<span class="hljs-number">04</span>.<span class="hljs-number">1</span> (Ubuntu)<br><br>Copyright (c) <span class="hljs-number">2000</span>, <span class="hljs-number">2020</span>, Oracle and/or its affiliates. All rights reserved.<br><br>Oracle is a registered trademark of Oracle Corporation and/or its<br>affiliates. Other names may be trademarks of their respective<br>owners.<br><br>Type <span class="hljs-string">&#x27;help;&#x27;</span> or <span class="hljs-string">&#x27;\h&#x27;</span> for help. Type <span class="hljs-string">&#x27;\c&#x27;</span> to clear the current input statement.<br><br>mysql&gt; use mysql; <span class="hljs-comment"># 使用mysql库</span><br></code></pre></div></td></tr></table></figure>
 
 <ol start="2">
-<li>Linux下 后台启动</li>
+<li>查看是否存在password字段 现在是这个(authentication_string)</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">celery multi start a1 -A redistrend -l info   ⭐不建议<br><br><span class="hljs-meta">#</span><span class="bash"> 指定<span class="hljs-built_in">log</span>文件以及pid文件的储存位置 ⭐⭐⭐⭐⭐</span><br>celery multi start a1 -A redistrend -l info --logfile=./log/1_post.log --pidfile=./log/1_post.pid<br></code></pre></div></td></tr></table></figure>
-
-
-
-<h2 id="在task文件路径停止celery"><a href="#在task文件路径停止celery" class="headerlink" title="在task文件路径停止celery"></a><font color="#00AA00">在task文件路径停止celery</font></h2><ol>
-<li>Windows下面 直接ctrl + c 就可以停止了 / 清掉redis</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 不写点什么怎么觉怪怪的</span><br></code></pre></div></td></tr></table></figure>
-
-<ol start="2">
-<li>清除celery的进程</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ps auxww|grep &quot;celery worker&quot;|grep -v grep|awk &#x27;&#123;print $2&#125;&#x27;|xargs kill -9<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p><font color="#FF0000">注意MySQL的版本不一样 密码字段就不一样</font></p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell">mysql&gt; desc user;<br>+------------------------+-----------------------------------+------+-----+-----------------------+-------+<br>| Field                  | <span class="hljs-built_in">Type</span>                              | Null | Key | Default               | Extra |<br>+------------------------+-----------------------------------+------+-----+-----------------------+-------+<br>| Host                   | char(<span class="hljs-number">60</span>)                          | NO   | PRI |                       |       |<br>| User                   | char(<span class="hljs-number">32</span>)                          | NO   | PRI |                       |       |<br>| authentication_string  | text                              | YES  |     | NULL                  |       |<br>.............................<br></code></pre></div></td></tr></table></figure>
 
 <ol start="3">
-<li>停止celery  stop</li>
+<li>修改root密码 其他用户也一样 </li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">celery multi stop a1 -A redistrend -l info<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell">mysql&gt; update user <span class="hljs-built_in">set</span> authentication_string=password(<span class="hljs-string">&quot;newpassword&quot;</span>) <span class="hljs-built_in">where</span> user=<span class="hljs-string">&quot;root&quot;</span> and Host=<span class="hljs-string">&quot;localhost&quot;</span>;<br></code></pre></div></td></tr></table></figure>
 
 <ol start="4">
-<li>重启 restart</li>
+<li>更新权限</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">celery multi restart a1 -A newtestfile -l info --pidfile=./log/1_post.pid<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell">mysql&gt; flush privileges;   <span class="hljs-comment"># 刷新权限</span><br>mysql&gt; quit;               <span class="hljs-comment"># 退出</span><br></code></pre></div></td></tr></table></figure>
+
+<ol start="5">
+<li>将文件<strong>mysqld.cnf</strong> 内的 <strong>skip-grant-tables</strong> 删除 重启</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell">root@xswdsa:~<span class="hljs-comment"># sudo systemctl restart mysql.service</span><br></code></pre></div></td></tr></table></figure>
 
 
             </div>
@@ -407,7 +358,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Python/">Python</a>
                     
-                      <a class="hover-with-bg" href="/categories/Python/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
+                      <a class="hover-with-bg" href="/categories/Python/MySQL/">MySQL</a>
                     
                   </div>
                 
@@ -415,7 +366,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
                     
                   </div>
                 
@@ -432,9 +383,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/17/mysql1130/">
+                      <a href="/2021/03/25/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL连接报错 1130问题</span>
+                        <span class="hidden-mobile">MySQL 修改连接数太大的时候</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -442,8 +393,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/13/hexo%E7%BE%8E%E5%8C%96%E9%A1%B5%E9%9D%A2/">
-                        <span class="hidden-mobile">hexo fluid美化页面效果</span>
+                      <a href="/2021/03/24/MySQL%E4%BF%AE%E6%94%B9%E8%BF%9E%E6%8E%A5%E6%95%B0/">
+                        <span class="hidden-mobile">MySQL 修改连接数太大的时候</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

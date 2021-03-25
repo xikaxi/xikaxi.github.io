@@ -225,27 +225,30 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/03/25/Redis%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81/" target="_self">
-          <img src="https://ae01.alicdn.com/kf/U36993d44a15c4f9089b87fc1f8fd8aeer.jpg" srcset="/img/loading.gif" alt="Redis 设置密码">
+        <a href="/2021/03/25/MySQL%E4%BF%AE%E6%94%B9%E8%BF%9E%E6%8E%A5%E6%95%B0/" target="_self">
+          <img src="https://ps.ssl.qhmsg.com/t020a77c198a8d0215e.jpg" srcset="/img/loading.gif" alt="MySQL 修改连接数太大的时候">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/03/25/Redis%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81/">Redis 设置密码</a>
+        <a href="/2021/03/25/MySQL%E4%BF%AE%E6%94%B9%E8%BF%9E%E6%8E%A5%E6%95%B0/">MySQL 修改连接数太大的时候</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/03/25/Redis%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81/">
+        <a href="/2021/03/25/MySQL%E4%BF%AE%E6%94%B9%E8%BF%9E%E6%8E%A5%E6%95%B0/">
           
           
             
           
-          记一次远程连接redis的时候 连接不上1就很奇怪, 明明服务器里面的redis没有设置过密码 就连使用python连接的时候都没有输入过密码连接redis 莫名其妙今天/12-07连接出错
+          MySQL出现连接数太大时 修改链接数报错提要
+12ERROR 1040 (HY000): Too many connections连接数太大的时候 更改一下MySQL
 
-报错提要
-123456AUTH ERROR报错信息已删除...看到这里 莫名其妙 以前连接的好好的 也没修改过什么配置文件...A君: 看一下能不能连接上?B君: 不能 还是一样的问题 AUTH ERROR
+在Linux下尝试进入MySQL服务1234mysql -uroot -pEnter password: ERROR 1040 (HY000): Too many connections如果还是出现以上错误信息
+
+
+重启MySQ
         </a>
       </p>
 
@@ -253,67 +256,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-25 16:20" pubdate>
-              2021-03-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Python/">Python</a>
-            
-              <a href="/categories/Python/Linux/">Linux</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux/">Linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/03/25/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" target="_self">
-          <img src="https://ae01.alicdn.com/kf/U2fd4d49566cf4a07a70b163d790dbb57u.jpg" srcset="/img/loading.gif" alt="Windows下远程连接MySQL">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/25/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/">Windows下远程连接MySQL</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/25/mysql%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/">
-          
-          
-            
-          
-          windows下连接远程MySQL报错提要
-1单纯想记录一下
-
-
-登入MySQL 输入以下命令12345678910111213141516171819202122(python36) root@xeswsd:# mysql -uroot -pwodaonimademysql: [Warning] Using a password on the command line interface can
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-25 16:16" pubdate>
+            <time datetime="2021-03-25 16:25" pubdate>
               2021-03-25
             </time>
           </div>
@@ -340,7 +283,563 @@
     </article>
   </div>
 
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/03/25/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E5%AD%98emoji%E8%A1%A8%E6%83%85/" target="_self">
+          <img src="https://ae01.alicdn.com/kf/Udb4b083f19974aa4b572b08a2be3314eh.jpg" srcset="/img/loading.gif" alt="MySQL数据库保存emoji表情">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/25/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E5%AD%98emoji%E8%A1%A8%E6%83%85/">MySQL数据库保存emoji表情</a>
+      </h1>
 
+      <p class="index-excerpt">
+        <a href="/2021/03/25/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E5%AD%98emoji%E8%A1%A8%E6%83%85/">
+          
+          
+            
+          
+          MySQL数据库保存emoji表情前情提要
+12微信登录的用户 获取用户名/有些用户的名称会带有emoji表情此时MySQL数据库就会报错 所以需要修改 让数据库能够保存emoji
+
+报错信息:
+1django.db.utils.OperationalError: (1366, &quot;Incorrect string value: &#x27;\\xE5\\xA4\\xAB\\xE4\\xB
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-25 16:25" pubdate>
+              2021-03-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+              <a href="/categories/Python/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/MySQL/">MySQL</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/03/25/MySQL%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D/" target="_self">
+          <img src="https://ae01.alicdn.com/kf/U9640f5f53a254d3ea8eb3d5e6b14d500J.jpg" srcset="/img/loading.gif" alt="MySQL 删除重复数据 多条件过滤删除">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/25/MySQL%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D/">MySQL 删除重复数据 多条件过滤删除</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/25/MySQL%E5%88%A0%E9%99%A4%E9%87%8D%E5%A4%8D/">
+          
+          
+            
+          
+          MySQL数据库保存重复值 去除重复值⭐⭐⭐开发提要
+1234数据导入时间太慢 重复计算数据库是否存在重复数据如果重复 则跳过 否则就创建 但是这样会出现数据量大的时候 时间缓慢在添加的时候 可以不校验 在后面异步操作数据库 自动删除重复的数据并保留id值最大/最小的数据
+
+实战演示 创建数据库及操作⭐⭐⭐
+创建数据库 并 use
+
+1234create database 数据库名称(sql_da
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-25 16:25" pubdate>
+              2021-03-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+              <a href="/categories/Python/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/MySQL/">MySQL</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/03/25/MySQL%E5%AF%86%E7%A0%81%E4%BF%AE%E6%94%B9/" target="_self">
+          <img src="https://ae01.alicdn.com/kf/U48af402c62304bddb31b65ba09f73547a.jpg" srcset="/img/loading.gif" alt="Ubuntu16.04 下 MySQL5.7密码修改">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/25/MySQL%E5%AF%86%E7%A0%81%E4%BF%AE%E6%94%B9/">Ubuntu16.04 下 MySQL5.7密码修改</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/25/MySQL%E5%AF%86%E7%A0%81%E4%BF%AE%E6%94%B9/">
+          
+          
+            
+          
+          Ubuntu16.04下 MySQL密码忘记操作报错提要
+12345root@xswdsa:~# mysql -uroot -p xxxxxxxxxxxmysql: [Warning] Using a password on the command line interface can be insecure.ERROR 1045 (28000): Access denied for user &
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-25 16:25" pubdate>
+              2021-03-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+              <a href="/categories/Python/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/MySQL/">MySQL</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/03/25/mysql1130/" target="_self">
+          <img src="https://ae01.alicdn.com/kf/U958883ad75624ff89d1c05fb1c67ef59e.jpg" srcset="/img/loading.gif" alt="MySQL连接报错 1130问题">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/25/mysql1130/">MySQL连接报错 1130问题</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/25/mysql1130/">
+          
+          
+            
+          
+          MySQL连接报错1130⭐⭐问题描述
+123通过Navicat for MySQL远程连接的时候报错mysql 1130的解决方法错误代码是1130，ERROR 1130: Host 1.2.7.0 is not allowed to connect to this MySQL server猜想是无法给远程连接的用户权限问题。
+
+问题解决描述
+12在服务器登入mysql后，更改 “mysql” 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-25 16:25" pubdate>
+              2021-03-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+              <a href="/categories/Python/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/MySQL/">MySQL</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/03/25/login-IP/" target="_self">
+          <img src="https://p.pstatp.com/origin/1376e0001f46d7a8f33f4" srcset="/img/loading.gif" alt="登录限制IP">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/25/login-IP/">登录限制IP</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/25/login-IP/">
+          
+          
+            
+          
+          登录-限制ip☟前情提要 ☟
+1234用户使用手机号码登录 校验密码输入错误的次数使用MySQL记录密码输入次数 当输入次数达到10次使用redis记录ip地址 将限制该ip禁止访问页面 30min本章使用: python3.6 django MySQL Redis
+
+
+登录接口–&gt;GET请求☟
+
+
+参数
+值
+备注
+请求方式
+
+
+
+参考路由
+http://127.0.0.1:8000/log
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-25 16:25" pubdate>
+              2021-03-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+              <a href="/categories/Python/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/03/25/Jwt_token/" target="_self">
+          <img src="https://ae01.alicdn.com/kf/Uf536496e45624fb2a15feeefbef115c7E.jpg" srcset="/img/loading.gif" alt="Jwt_token的认证与生成">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/25/Jwt_token/">Jwt_token的认证与生成</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/25/Jwt_token/">
+          
+          
+            
+          
+          JWT的简单使用TIP:安装模块 jwt是一个第三方模块1pip install djangorestframework-jwt -i https://pypi.douban.com/simple/
+
+TIP:JWT的使用 (一) 自定义返回的12345678910111213141516171819# settings.py 里面配置一下REST_FRAMEWORK = &#123;    # 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-25 16:25" pubdate>
+              2021-03-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+              <a href="/categories/Python/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/03/25/hexo%E7%BE%8E%E5%8C%96%E9%A1%B5%E9%9D%A2/" target="_self">
+          <img src="https://p.pstatp.com/origin/1386a0000f3ce10d872d6" srcset="/img/loading.gif" alt="hexo fluid美化页面效果">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/25/hexo%E7%BE%8E%E5%8C%96%E9%A1%B5%E9%9D%A2/">hexo fluid美化页面效果</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/25/hexo%E7%BE%8E%E5%8C%96%E9%A1%B5%E9%9D%A2/">
+          
+          
+            
+          
+          Hexo Fluid美化页面前情提要
+123# 页面添加站点运行时间# 美化鼠标# 动态线条
+
+
+
+1. 主题_config.yml文件中修改custom_js与custom_csscustom_js 修改前 / 修改后123456789101112131415161718# 修改前custom_js:# 指定自定义 .css 文件路径，用法和 custom_js 相同# The usage is
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-25 16:25" pubdate>
+              2021-03-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Hexo/">Hexo</a>
+            
+              <a href="/categories/Hexo/Themes/">Themes</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/hexo/">hexo</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/03/25/github%E7%99%BB%E5%BD%95/" target="_self">
+          <img src="https://ae01.alicdn.com/kf/U9907fd513ebb4bbaaa396d964e88c232I.jpg" srcset="/img/loading.gif" alt="GitHub授权登录获取ID密钥">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/25/github%E7%99%BB%E5%BD%95/">GitHub授权登录获取ID密钥</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/25/github%E7%99%BB%E5%BD%95/">
+          
+          
+            
+          
+          Github的授权密钥的获取进入github，选择settings=&gt;Developer-settings，然后选择OAuth Apps=&gt;New OAuth App。最终如下图
+
+点击Register application后¶
+
+注意:密钥只能查看一次 否则需要重新生成/删除
+点击跳转 django使用social实现第三方登录
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-25 16:25" pubdate>
+              2021-03-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+              <a href="/categories/Python/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/03/25/Excel/" target="_self">
+          <img src="https://ae01.alicdn.com/kf/U45aaec27320743f9b0a871f2ed2ed2d4T.jpg" srcset="/img/loading.gif" alt="Python Pandas操作Excel">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/25/Excel/">Python Pandas操作Excel</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/25/Excel/">
+          
+          
+            
+          
+          Python Pandas操作Excel前情提要
+123本章使用的 Python3.6 Pandas==0.25.3项目中需要用到excel的文件字段太多 考虑到后续字段命名的变动以及中文/英文/日文...等多国语言的校验操作麻烦 后改进的操作方式
+
+测试文件点击下载Pandas中文文档Pandas中文文档1234# 安装pandas# -i https://pypi.douban.com/sim
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-25 16:25" pubdate>
+              2021-03-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Python/">Python</a>
+            
+              <a href="/categories/Python/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python/">Python</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
 
 
 

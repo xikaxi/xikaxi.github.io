@@ -1,0 +1,693 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://ae01.alicdn.com/kf/U9640f5f53a254d3ea8eb3d5e6b14d500J.jpg">
+  <link rel="icon" href="https://ae01.alicdn.com/kf/U9640f5f53a254d3ea8eb3d5e6b14d500J.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="">
+  
+  <meta name="author" content="玩世不恭&#39;s">
+  <meta name="keywords" content="">
+  
+  <title>微信支付-后端VIEW - 玩世不恭&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>玩世不恭's</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/playlist/">
+                <i class="iconfont icon-music"></i>
+                music
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://www.bree.vip/">
+                <i class="iconfont icon-images"></i>
+                图床
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ae01.alicdn.com/kf/Uceecb778c2e04c9a89dd0bfa911a0e63w.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="微信支付-后端VIEW">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      玩世不恭's
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-25 16:25" pubdate>
+        2021年3月25日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      30
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">微信支付-后端VIEW</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年3月25日 上午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="WeChat-Pay"><a href="#WeChat-Pay" class="headerlink" title="WeChat Pay"></a><font color=" DeepSkyBlue ">WeChat Pay</font></h2><p><font color="  LimeGreen "><a target="_blank" rel="noopener" href="https://pay.weixin.qq.com/wiki/doc/api/index.html">微信开发文档</a></font></p>
+<h2 id="配置路由与文件路径"><a href="#配置路由与文件路径" class="headerlink" title="配置路由与文件路径"></a><font color=" DeepSkyBlue ">配置路由与文件路径</font></h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;wechatPay URL Configuration</span><br><span class="hljs-string"></span><br><span class="hljs-string">The `urlpatterns` list routes URLs to views. For more information please see:</span><br><span class="hljs-string">    https://docs.djangoproject.com/en/1.11/topics/http/urls/</span><br><span class="hljs-string">Examples:</span><br><span class="hljs-string">Function views</span><br><span class="hljs-string">    1. Add an import:  from my_app import views</span><br><span class="hljs-string">    2. Add a URL to urlpatterns:  url(r&#x27;^$&#x27;, views.home, name=&#x27;home&#x27;)</span><br><span class="hljs-string">Class-based views</span><br><span class="hljs-string">    1. Add an import:  from other_app.views import Home</span><br><span class="hljs-string">    2. Add a URL to urlpatterns:  url(r&#x27;^$&#x27;, Home.as_view(), name=&#x27;home&#x27;)</span><br><span class="hljs-string">Including another URLconf</span><br><span class="hljs-string">    1. Import the include() function: from django.conf.urls import url, include</span><br><span class="hljs-string">    2. Add a URL to urlpatterns:  url(r&#x27;^blog/&#x27;, include(&#x27;blog.urls&#x27;))</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-keyword">from</span> django.conf.urls <span class="hljs-keyword">import</span> url, include<br><span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin<br><br>urlpatterns = [<br>    url(<span class="hljs-string">r&#x27;^admin/&#x27;</span>, admin.site.urls),<br>    url(<span class="hljs-string">r&#x27;^&#x27;</span>, include(<span class="hljs-string">&#x27;pay.urls&#x27;</span>))<br>]<br><br></code></pre></div></td></tr></table></figure>
+
+<p><font color="  LimeGreen ">在子应用当中 新建urls.py</font></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.conf.urls <span class="hljs-keyword">import</span> url<br><span class="hljs-keyword">from</span> . <span class="hljs-keyword">import</span> views<br><br>urlpatterns = [<br>    url(<span class="hljs-string">r&#x27;^$&#x27;</span>, views.index), <span class="hljs-comment"># 主页面</span><br>    url(<span class="hljs-string">r&#x27;^pay&#x27;</span>, views.pay), <span class="hljs-comment"># 微信支付的接口</span><br>    url(<span class="hljs-string">r&#x27;^result&#x27;</span>, views.result), <span class="hljs-comment"># 微信支付成功之后 回调函数</span><br>    url(<span class="hljs-string">r&#x27;websocketLink/(?P&lt;out_trade_no&gt;\w+)&#x27;</span>, views.websocketLink)  <span class="hljs-comment"># webSocket 链接</span><br>]<br><br></code></pre></div></td></tr></table></figure>
+
+<p><font color="  LimeGreen ">配置一下模板文件的访问</font></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">TEMPLATES = [<br>    &#123;<br>        <span class="hljs-string">&#x27;BACKEND&#x27;</span>: <span class="hljs-string">&#x27;django.template.backends.django.DjangoTemplates&#x27;</span>,<br>        <span class="hljs-string">&#x27;DIRS&#x27;</span>: [os.path.join(BASE_DIR, <span class="hljs-string">&#x27;templates&#x27;</span>)],<br>        <span class="hljs-string">&#x27;APP_DIRS&#x27;</span>: <span class="hljs-literal">True</span>,<br>        <span class="hljs-string">&#x27;OPTIONS&#x27;</span>: &#123;<br>            <span class="hljs-string">&#x27;context_processors&#x27;</span>: [<br>                <span class="hljs-string">&#x27;django.template.context_processors.debug&#x27;</span>,<br>                <span class="hljs-string">&#x27;django.template.context_processors.request&#x27;</span>,<br>                <span class="hljs-string">&#x27;django.contrib.auth.context_processors.auth&#x27;</span>,<br>                <span class="hljs-string">&#x27;django.contrib.messages.context_processors.messages&#x27;</span>,<br>            ],<br>        &#125;,<br>    &#125;,<br>]<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="返回主页面及settings配置"><a href="#返回主页面及settings配置" class="headerlink" title="返回主页面及settings配置"></a><font color=" DeepSkyBlue ">返回主页面及settings配置</font></h2><figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.shortcuts <span class="hljs-keyword">import</span> render<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index</span>(<span class="hljs-params">request</span>):</span><br>    <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&#x27;index.html&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
+
+<p><font color="  LimeGreen ">在子应用当中新建pay_setting.py 配置一下微信支付需要的数据</font></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">APP_ID = <span class="hljs-string">&quot;wx**********&quot;</span>  <span class="hljs-comment"># 微信公众号ID</span><br>MCH_ID = <span class="hljs-string">&quot;1*********&quot;</span>  <span class="hljs-comment"># 商户号ID</span><br>API_KEY = <span class="hljs-string">&quot;8**************************c&quot;</span>  <span class="hljs-comment"># APK密钥(在商户平台里--&gt;&gt;API密钥里面设置)(建议 关于密钥都设置成统一的 好记)</span><br>UFDOOER_URL = <span class="hljs-string">&quot;https://api.mch.weixin.qq.com/pay/unifiedorder&quot;</span>  <span class="hljs-comment"># 微信统一下单地址 默认的</span><br><span class="hljs-comment"># 注意 内网穿透的地址是只能维持几个小时的 如果时间到了 请自行重启</span><br>NOTIFY_URL = <span class="hljs-string">&quot;http://t4knvu.natappfree.cc/result&quot;</span>  <span class="hljs-comment"># 回调，可使用内网穿透工具进行测试</span><br>CREATE_IP = <span class="hljs-string">&quot;127.0.0.1&quot;</span>  <span class="hljs-comment"># 服务器的公网IP 测试使用本地</span><br><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="微信支付-扫码接口与回调函数"><a href="#微信支付-扫码接口与回调函数" class="headerlink" title="微信支付 扫码接口与回调函数"></a><font color=" DeepSkyBlue ">微信支付 扫码接口与回调函数</font></h2><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>备注</th>
+<th>请求方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>参考路由</td>
+<td><a target="_blank" rel="noopener" href="http://127.0.0.1:8000/pay/">http://127.0.0.1:8000/pay/</a></td>
+<td>微信扫码支付的第一步 扫码</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>body</td>
+<td>xxx微信支付</td>
+<td>商品描述</td>
+<td></td>
+</tr>
+<tr>
+<td>total_fee</td>
+<td>Aswce67249198721</td>
+<td>订单号</td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pay</span>(<span class="hljs-params">request</span>):</span><br>    body = <span class="hljs-string">&#x27;payTest&#x27;</span>  <span class="hljs-comment"># 商品描述</span><br>    total_fee = <span class="hljs-number">1</span>  <span class="hljs-comment"># 付款金额，单位是分，必须是整数</span><br>    out_trade_no = create_orderId(<span class="hljs-number">5</span>) <span class="hljs-comment"># 这是一个自定义的函数 目的是生成订单号</span><br>    data_dict = wxpay(body, total_fee, out_trade_no)  <span class="hljs-comment"># 这是一个自定义的函数</span><br>    <span class="hljs-keyword">if</span> data_dict.get(<span class="hljs-string">&#x27;return_code&#x27;</span>) == <span class="hljs-string">&#x27;SUCCESS&#x27;</span>:<br>        code_url = get_code_url(data_dict) <span class="hljs-comment"># 这是一个自定义函数,目的是获取支付二维码的地址</span><br>        img = create_image(code_url) <span class="hljs-comment"># 创建支付二维码的图片</span><br>        qrcode_name = out_trade_no + <span class="hljs-string">&#x27;wxpay.png&#x27;</span> <span class="hljs-comment"># 订单号加后缀 作为图片</span><br>        img.save(<span class="hljs-string">r&#x27;static&#x27;</span> + <span class="hljs-string">&#x27;/&#x27;</span> + qrcode_name) <span class="hljs-comment"># 保存图片</span><br>        <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&#x27;qrcode.html&#x27;</span>, &#123;<span class="hljs-string">&#x27;qrcode_name&#x27;</span>: qrcode_name, <span class="hljs-string">&#x27;out_trade_no&#x27;</span>: out_trade_no&#125;) <span class="hljs-comment"># 前端获取返回的订单号 轮询订单是否支付完成</span><br>    <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&#x27;index.html&#x27;</span>, &#123;<span class="hljs-string">&#x27;err_msg&#x27;</span>: <span class="hljs-string">&#x27;获取微信的code_url失败&#x27;</span>&#125;)<br></code></pre></div></td></tr></table></figure>
+
+<p><font color="  LimeGreen ">上述的视图,如果支付成功 就走支付成功的回调函数</font></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">result</span>(<span class="hljs-params">request</span>):</span><br>    data_dict = trans_xml_to_dict(request.body)  <span class="hljs-comment"># 回调数据转字典</span><br>    <span class="hljs-comment"># print(&#x27;支付回调结果&#x27;, data_dict)</span><br>    sign = data_dict.pop(<span class="hljs-string">&#x27;sign&#x27;</span>)  <span class="hljs-comment"># 取出签名</span><br>    back_sign = get_sign(data_dict, API_KEY)  <span class="hljs-comment"># 计算签名</span><br>    <span class="hljs-comment"># 验证签名是否与回调签名相同</span><br>    <span class="hljs-keyword">if</span> sign == back_sign <span class="hljs-keyword">and</span> data_dict[<span class="hljs-string">&#x27;return_code&#x27;</span>] == <span class="hljs-string">&#x27;SUCCESS&#x27;</span>:<br>        <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">        检查对应业务数据的状态，判断该通知是否已经处理过，如果没有处理过再进行处理，如果处理过直接返回结果成功。</span><br><span class="hljs-string">        &#x27;&#x27;&#x27;</span><br>        print(<span class="hljs-string">&#x27;微信支付成功会回调！&#x27;</span>)<br>        <span class="hljs-comment"># 处理支付成功逻辑，向前端页面发送实时消息</span><br>        out_trade_no = data_dict[<span class="hljs-string">&#x27;out_trade_no&#x27;</span>]<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        此处可做支付成功后的业务逻辑</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        send(out_trade_no, <span class="hljs-string">&#x27;支付成功&#x27;</span>) <span class="hljs-comment"># 返回前端的消息</span><br>        <span class="hljs-comment"># 返回接收结果给微信，否则微信会每隔8分钟发送post请求</span><br>        <span class="hljs-keyword">return</span> HttpResponse(trans_dict_to_xml(&#123;<span class="hljs-string">&#x27;return_code&#x27;</span>: <span class="hljs-string">&#x27;SUCCESS&#x27;</span>, <span class="hljs-string">&#x27;return_msg&#x27;</span>: <span class="hljs-string">&#x27;OK&#x27;</span>&#125;))<br>    <span class="hljs-keyword">return</span> HttpResponse(trans_dict_to_xml(&#123;<span class="hljs-string">&#x27;return_code&#x27;</span>: <span class="hljs-string">&#x27;FAIL&#x27;</span>, <span class="hljs-string">&#x27;return_msg&#x27;</span>: <span class="hljs-string">&#x27;SIGNERROR&#x27;</span>&#125;))<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="前端轮询支付状态"><a href="#前端轮询支付状态" class="headerlink" title="前端轮询支付状态"></a><font color=" DeepSkyBlue ">前端轮询支付状态</font></h2><p><font color="  LimeGreen ">返回前端的消息</font></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">clients = &#123;&#125;  <span class="hljs-comment"># 创建一个空字典，用于保存所有接入的用户地址</span><br><br><br><span class="hljs-meta">@accept_websocket</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">websocketLink</span>(<span class="hljs-params">request, out_trade_no</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;连接websocket&quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> request.is_websocket:<br>        lock = threading.RLock()  <span class="hljs-comment"># rlock线程锁</span><br>        <span class="hljs-keyword">try</span>:<br>            lock.acquire()  <span class="hljs-comment"># 抢占资源</span><br>            clients[out_trade_no] = request.websocket<br>            <span class="hljs-comment"># 监听接收客户端发送的消息 或者 客户端断开连接</span><br>            <span class="hljs-keyword">for</span> message <span class="hljs-keyword">in</span> request.websocket:<br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> message:<br>                    <span class="hljs-keyword">break</span><br>                <span class="hljs-keyword">else</span>:<br>                    request.websocket.send(message)<br>        <span class="hljs-keyword">finally</span>:<br>            <span class="hljs-comment"># 释放锁</span><br>            lock.release()<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">send</span>(<span class="hljs-params">out_trade_no, msg</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;服务端发送消息&quot;&quot;&quot;</span><br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">if</span> clients[out_trade_no]:<br>            clients[out_trade_no].send(msg.encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br>            <span class="hljs-comment"># 支付结果发送给前端页面后，该连接使命就完成了，前端页面会关闭该链接，这里需要当前连接的记录</span><br>            <span class="hljs-keyword">del</span> clients[out_trade_no]<br>    <span class="hljs-keyword">except</span> BaseException:<br>        print(<span class="hljs-string">&#x27;发送消息出错了...&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="Utils-工具包"><a href="#Utils-工具包" class="headerlink" title="Utils 工具包"></a><font color=" DeepSkyBlue ">Utils 工具包</font></h2><p><font color="  LimeGreen ">上述的视图,内部所需的函数 自定义工具包</font></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> Random<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> hashlib<br><span class="hljs-keyword">from</span> bs4 <span class="hljs-keyword">import</span> BeautifulSoup<br><span class="hljs-keyword">from</span> pay.pay_setting <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> qrcode<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">random_str</span>(<span class="hljs-params">randomlength=<span class="hljs-number">8</span></span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    生成随机字符串</span><br><span class="hljs-string">    :param randomlength: 字符串长度</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-built_in">str</span> = <span class="hljs-string">&#x27;&#x27;</span><br>    chars = <span class="hljs-string">&#x27;AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789&#x27;</span><br>    length = <span class="hljs-built_in">len</span>(chars) - <span class="hljs-number">1</span><br>    random = Random()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(randomlength):<br>        <span class="hljs-built_in">str</span> += chars[random.randint(<span class="hljs-number">0</span>, length)]<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">str</span><br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">create_orderId</span>(<span class="hljs-params">length</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    生成扫码订单号</span><br><span class="hljs-string">    :param length: 自定义长度</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    local_time = time.strftime(<span class="hljs-string">&#x27;%Y%m%d%H%M%S&#x27;</span>, time.localtime(time.time()))<br>    out_trade_no = random_str(length) + local_time<br>    <span class="hljs-keyword">return</span> out_trade_no<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_sign</span>(<span class="hljs-params">data_dict, key</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    签名函数</span><br><span class="hljs-string">    :param data_dict: 需要签名的参数，格式为字典</span><br><span class="hljs-string">    :param key: 密钥 ，即上面的API_KEY</span><br><span class="hljs-string">    :return: 字符串</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    params_list = <span class="hljs-built_in">sorted</span>(data_dict.items(), key=<span class="hljs-keyword">lambda</span> e: e[<span class="hljs-number">0</span>], reverse=<span class="hljs-literal">False</span>)  <span class="hljs-comment"># 参数字典倒排序为列表</span><br>    params_str = <span class="hljs-string">&quot;&amp;&quot;</span>.join(<span class="hljs-string">u&quot;&#123;&#125;=&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(k, v) <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> params_list) + <span class="hljs-string">&#x27;&amp;key=&#x27;</span> + key<br>    <span class="hljs-comment"># 组织参数字符串并在末尾添加商户交易密钥</span><br>    md5 = hashlib.md5()  <span class="hljs-comment"># 使用MD5加密模式</span><br>    md5.update(params_str.encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>))  <span class="hljs-comment"># 将参数字符串传入</span><br>    sign = md5.hexdigest().upper()  <span class="hljs-comment"># 完成加密并转为大写</span><br>    <span class="hljs-keyword">return</span> sign<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trans_dict_to_xml</span>(<span class="hljs-params">data_dict</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    定义字典转XML的函数</span><br><span class="hljs-string">    :param data_dict:</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    data_xml = []<br>    <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">sorted</span>(data_dict.keys()):  <span class="hljs-comment"># 遍历字典排序后的key</span><br>        v = data_dict.get(k)  <span class="hljs-comment"># 取出字典中key对应的value</span><br>        <span class="hljs-keyword">if</span> k == <span class="hljs-string">&#x27;detail&#x27;</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> v.startswith(<span class="hljs-string">&#x27;&lt;![CDATA[&#x27;</span>):  <span class="hljs-comment"># 添加XML标记</span><br>            v = <span class="hljs-string">&#x27;&lt;![CDATA[&#123;&#125;]]&gt;&#x27;</span>.<span class="hljs-built_in">format</span>(v)<br>        data_xml.append(<span class="hljs-string">&#x27;&lt;&#123;key&#125;&gt;&#123;value&#125;&lt;/&#123;key&#125;&gt;&#x27;</span>.<span class="hljs-built_in">format</span>(key=k, value=v))<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;xml&gt;&#123;&#125;&lt;/xml&gt;&#x27;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;&#x27;</span>.join(data_xml))  <span class="hljs-comment"># 返回XML</span><br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">trans_xml_to_dict</span>(<span class="hljs-params">data_xml</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    定义XML转字典的函数</span><br><span class="hljs-string">    :param data_xml:</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    soup = BeautifulSoup(data_xml, features=<span class="hljs-string">&#x27;xml&#x27;</span>)<br>    xml = soup.find(<span class="hljs-string">&#x27;xml&#x27;</span>)  <span class="hljs-comment"># 解析XML</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> xml:<br>        <span class="hljs-keyword">return</span> &#123;&#125;<br>    data_dict = <span class="hljs-built_in">dict</span>([(item.name, item.text) <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> xml.find_all()])<br>    <span class="hljs-keyword">return</span> data_dict<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wxpay</span>(<span class="hljs-params">body, total_fee, out_trade_no</span>):</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    向微信发出请求，并获取返回的xml，将该xml转为字典</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    <span class="hljs-comment"># random_str自定义的函数</span><br>    nonce_str = random_str(<span class="hljs-number">20</span>)  <span class="hljs-comment"># 拼接出随机的字符串即可，我这里是用  时间+随机数字+5个随机字母</span><br>    params = &#123;<br>        <span class="hljs-string">&#x27;appid&#x27;</span>: APP_ID,  <span class="hljs-comment"># APPID</span><br>        <span class="hljs-string">&#x27;mch_id&#x27;</span>: MCH_ID,  <span class="hljs-comment"># 商户号</span><br>        <span class="hljs-string">&#x27;nonce_str&#x27;</span>: nonce_str,  <span class="hljs-comment"># 随机字符串</span><br>        <span class="hljs-string">&#x27;out_trade_no&#x27;</span>: out_trade_no,  <span class="hljs-comment"># 订单编号，可自定义</span><br>        <span class="hljs-string">&#x27;total_fee&#x27;</span>: total_fee,  <span class="hljs-comment"># 订单总金额</span><br>        <span class="hljs-string">&#x27;spbill_create_ip&#x27;</span>: CREATE_IP,  <span class="hljs-comment"># 自己服务器的IP地址</span><br>        <span class="hljs-string">&#x27;notify_url&#x27;</span>: NOTIFY_URL,  <span class="hljs-comment"># 回调地址，微信支付成功后会回调这个url，告知商户支付结果</span><br>        <span class="hljs-string">&#x27;body&#x27;</span>: body,  <span class="hljs-comment"># 商品描述</span><br>        <span class="hljs-string">&#x27;trade_type&#x27;</span>: <span class="hljs-string">&#x27;NATIVE&#x27;</span>,  <span class="hljs-comment"># 扫码支付类型</span><br>    &#125;<br>    sign = get_sign(params, API_KEY)  <span class="hljs-comment"># 获取签名</span><br>    params[<span class="hljs-string">&#x27;sign&#x27;</span>] = sign  <span class="hljs-comment"># 添加签名到参数字典</span><br>    xml = trans_dict_to_xml(params)  <span class="hljs-comment"># 转换字典为XML</span><br>    <span class="hljs-comment"># 以POST方式向微信公众平台服务器发起请求</span><br>    response = requests.request(<span class="hljs-string">&#x27;post&#x27;</span>, <span class="hljs-string">&#x27;https://api.mch.weixin.qq.com/pay/unifiedorder&#x27;</span>, data=xml)<br>    data_dict = trans_xml_to_dict(response.content)  <span class="hljs-comment"># 将请求返回的数据转为字典</span><br>    <span class="hljs-keyword">return</span> data_dict<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_code_url</span>(<span class="hljs-params">data_dict</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    从微信返回的数据中提取出二维码字符串</span><br><span class="hljs-string">    :param data_dict: 字典数据</span><br><span class="hljs-string">    :return: 二维码链接</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    code_url = data_dict.get(<span class="hljs-string">&#x27;code_url&#x27;</span>)<br>    <span class="hljs-keyword">return</span> code_url<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">create_image</span>(<span class="hljs-params">code_url</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    将传进来的二维码链接转换为二维码图片</span><br><span class="hljs-string">    :param code_url: 二维码链接</span><br><span class="hljs-string">    :return: 二维码图片</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    img = qrcode.make(code_url)<br>    <span class="hljs-keyword">return</span> img<br><br></code></pre></div></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/WeChat/">WeChat</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/WeChat-Pay/">WeChat Pay</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/25/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">微信支付-会员升级</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/25/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-2/">
+                        <span class="hidden-mobile">微信支付-前端HTML</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "m4lFuQXnnTDGDinsm73TC8zv-gzGzoHsz",
+          app_key: "uGukCqwYSQwFXmED9y2i5Xdu",
+          placeholder: "牛逼的人 早已提出问题",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://www.bree.vip" target="_blank" rel="nofollow noopener"><span>Rudy</span></a> <i class="iconfont icon-love"></i> <a href="https://bree.vip" target="_self" rel="nofollow noopener"><span>玩世不恭</span></a> 
+  </div>
+  
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        晋ICP证2021005257号
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021005257"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="https://ae01.alicdn.com/kf/Ua271b6001e4e4cf4995b23fad8401cba0.jpg" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>晋ICP备2021005257号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+      
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/caidai.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/timeDate.js"></script>
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+  <center>
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+      //运行时间bynote.cn
+      var now = new Date();
+      function createtime() {
+        var grt = new Date("8/15/2020 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if (String(hnum).length == 1) { hnum = "0" + hnum; } minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if (String(mnum).length == 1) { mnum = "0" + mnum; }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if (String(snum).length == 1) { snum = "0" + snum; }
+        document.getElementById("timeDate").innerHTML = "本站已运行 " + dnum + " 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+      setInterval("createtime()", 250);
+    </script>
+  </center>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/mikoto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>

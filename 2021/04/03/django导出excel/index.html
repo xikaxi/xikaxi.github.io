@@ -20,7 +20,7 @@
   <meta name="author" content="柒仔与蝉鸣">
   <meta name="keywords" content="">
   
-  <title>MySQL 修改连接数太大的时候 - 柒仔与蝉鸣</title>
+  <title>Django Orm 导出MySQL数据库数据到Excel - 柒仔与蝉鸣</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -208,7 +208,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="MySQL 修改连接数太大的时候">
+            <span class="h2" id="subtitle" title="Django Orm 导出MySQL数据库数据到Excel">
               
             </span>
 
@@ -223,8 +223,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-25 16:25" pubdate>
-        2021年3月25日 下午
+      <time datetime="2021-04-03 01:12" pubdate>
+        2021年4月3日 凌晨
       </time>
     </span>
   
@@ -235,7 +235,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      237 字
+      550 字
     </span>
   
 
@@ -245,7 +245,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      9
        分钟
     </span>
   
@@ -283,50 +283,55 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">MySQL 修改连接数太大的时候</h1>
+            <h1 style="display: none">Django Orm 导出MySQL数据库数据到Excel</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年3月31日 上午
+                  本文最后更新于：2021年4月6日 下午
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="MySQL出现连接数太大时-修改链接数"><a href="#MySQL出现连接数太大时-修改链接数" class="headerlink" title="MySQL出现连接数太大时 修改链接数"></a><font color="#00BBFF">MySQL出现连接数太大时 修改链接数</font></h2><p><code>报错提要</code></p>
-<figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">ERROR</span> <span class="hljs-number">1040</span> (HY000): Too many connections<br>连接数太大的时候 更改一下MySQL<br></code></pre></div></td></tr></table></figure>
+              <h2 id="Django-MySQL数据导出excel"><a href="#Django-MySQL数据导出excel" class="headerlink" title="Django MySQL数据导出excel"></a><font color=" DeepSkyBlue ">Django MySQL数据导出excel</font></h2><p><code>前情提要</code></p>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell">* 本章将使用 <br>django <span class="hljs-number">1.11</span>.<span class="hljs-number">11</span> 版本<br>MySQL  <span class="hljs-number">5.7</span> 版本<br>xlrd   <span class="hljs-number">1.2</span>.<span class="hljs-number">0</span> 版本<br>xlwt   <span class="hljs-number">1.3</span>.<span class="hljs-number">0</span> 版本<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="在Linux下尝试进入MySQL服务"><a href="#在Linux下尝试进入MySQL服务" class="headerlink" title="在Linux下尝试进入MySQL服务"></a><font color="#00BBFF">在Linux下尝试进入MySQL服务</font></h2><figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">mysql</span> -uroot -p<br>Enter password: <br>ERROR <span class="hljs-number">1040</span> (HY000): Too many connections<br>如果还是出现以上错误信息<br></code></pre></div></td></tr></table></figure>
+<p><font color="gree">安装上述依赖</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">* 安装方式 <br>* pip 镜像源 https://pypi.douban.com/simple/<br>pip install django==1.11.11 -i https://pypi.douban.com/simple/<br>pip install pymysql -i https://pypi.douban.com/simple/<br>pip install xlrd -i https://pypi.douban.com/simple/<br>pip install xlwt -i https://pypi.douban.com/simple/<br></code></pre></div></td></tr></table></figure>
 
-<ol>
-<li>重启MySQL服务</li>
+
+
+<h2 id="前端js-html"><a href="#前端js-html" class="headerlink" title="前端js + html"></a><font color=" DeepSkyBlue ">前端js + html</font></h2><ol>
+<li>引入js文件 jq文件</li>
 </ol>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx">/etc/init.d/mysql restart<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 引入外部 网络上的js --&gt;</span><br>&lt;script<br>    src=&quot;https://code.jquery.com/jquery-3.3.1.min.js&quot;<br>    integrity=&quot;sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=&quot;<br>    crossorigin=&quot;anonymous&quot;&gt;<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+
 
 <ol start="2">
-<li>重新登录MySQL服务</li>
+<li>js函数</li>
 </ol>
-<figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">mysql</span> -uroot -p<br>Enter password: <br>Welcome to the MySQL monitor.  Commands end with ; <span class="hljs-attribute">or</span> \g.<br>Your MySQL connection id is <span class="hljs-number">20</span><br>Server version: <span class="hljs-number">5</span>.<span class="hljs-number">7</span>.<span class="hljs-number">30</span>-0ubuntu0.<span class="hljs-number">16</span>.<span class="hljs-number">04</span>.<span class="hljs-number">1</span> (Ubuntu)<br><br>Copyright (c) <span class="hljs-number">2000</span>, <span class="hljs-number">2020</span>, Oracle and/or its affiliates. All rights reserved.<br><br>Oracle is a registered trademark of Oracle Corporation and/or its<br>affiliates. Other names may be trademarks of their respective<br>owners.<br><br>Type <span class="hljs-string">&#x27;help;&#x27;</span> or <span class="hljs-string">&#x27;\h&#x27;</span> for help. Type <span class="hljs-string">&#x27;\c&#x27;</span> to clear the current input statement.<br><br>mysql&gt; <br></code></pre></div></td></tr></table></figure>
-
-<h2 id="使用命令-将连接数提高"><a href="#使用命令-将连接数提高" class="headerlink" title="使用命令 将连接数提高"></a><font color="#00BBFF">使用命令 将连接数提高</font></h2><ol>
-<li>查看连接数</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-operator">&gt;&gt;</span> <span class="hljs-keyword">show</span> variables <span class="hljs-keyword">like</span> &quot;max_connections&quot;;<br><span class="hljs-operator">+</span><span class="hljs-comment">-----------------+-------+</span><br><span class="hljs-operator">|</span> Variable_name   <span class="hljs-operator">|</span> <span class="hljs-keyword">Value</span> <span class="hljs-operator">|</span><br><span class="hljs-operator">+</span><span class="hljs-comment">-----------------+-------+</span><br><span class="hljs-operator">|</span> max_connections <span class="hljs-operator">|</span> <span class="hljs-number">151</span>   <span class="hljs-operator">|</span><br><span class="hljs-operator">+</span><span class="hljs-comment">-----------------+-------+</span><br></code></pre></div></td></tr></table></figure>
-
-<ol start="2">
-<li>修改连接数</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-operator">&gt;&gt;</span> <span class="hljs-keyword">set</span> <span class="hljs-keyword">GLOBAL</span> max_connections<span class="hljs-operator">=</span><span class="hljs-number">3600</span>;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">$(<span class="hljs-string">&quot;#export_excel&quot;</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>        <span class="hljs-keyword">var</span> csrf = $(<span class="hljs-string">&#x27;input[name=&quot;csrfmiddlewaretoken&quot;]&#x27;</span>).val();<br>        <span class="hljs-keyword">const</span> req = <span class="hljs-keyword">new</span> XMLHttpRequest();<br>        req.open(<span class="hljs-string">&#x27;POST&#x27;</span>, <span class="hljs-string">&#x27;/url/your url/&#x27;</span>, <span class="hljs-literal">true</span>);<br>        req.responseType = <span class="hljs-string">&#x27;blob&#x27;</span>;<br>        req.setRequestHeader(<span class="hljs-string">&#x27;Content-Type&#x27;</span>, <span class="hljs-string">&#x27;application/x-www-form-urlencoded&#x27;</span>); <span class="hljs-comment">//设置请求头</span><br>        req.send(<span class="hljs-string">&#x27;f_name=&#x27;</span> + $(<span class="hljs-string">&#x27;#f_name&#x27;</span>).val() + <span class="hljs-string">&quot;&amp;&amp;csrfmiddlewaretoken=&quot;</span> + csrf); <span class="hljs-comment">//保存的文件名称</span><br>        req.onload = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>            <span class="hljs-keyword">const</span> data = req.response;<br>            <span class="hljs-keyword">const</span> a = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;a&#x27;</span>);<br>            <span class="hljs-keyword">const</span> blob = <span class="hljs-keyword">new</span> Blob([data]);<br>            <span class="hljs-keyword">const</span> blobUrl = <span class="hljs-built_in">window</span>.URL.createObjectURL(blob);<br>            download(blobUrl);<br>        &#125;;<br><br>    &#125;);<br><br>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">download</span>(<span class="hljs-params">blobUrl</span>) </span>&#123;<br>        <span class="hljs-keyword">var</span> f_name = $(<span class="hljs-string">&quot;input[name=&#x27;f_name&#x27;]&quot;</span>).val();<br>        <span class="hljs-keyword">const</span> a = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;a&#x27;</span>);<br>        a.style.display = <span class="hljs-string">&#x27;none&#x27;</span>;<br>        a.download = f_name + <span class="hljs-string">&quot;.xls&quot;</span>;<br>        a.href = blobUrl;<br>        a.click();<br>        <span class="hljs-built_in">document</span>.body.removeChild(a);<br>    &#125;<br></code></pre></div></td></tr></table></figure>
 
 <ol start="3">
-<li>查看连接数是否修改成功</li>
+<li>html  导出按钮</li>
 </ol>
-<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-operator">&gt;&gt;</span> <span class="hljs-keyword">show</span> variables <span class="hljs-keyword">like</span> &quot;max_connections&quot;;<br><span class="hljs-operator">+</span><span class="hljs-comment">-----------------+-------+</span><br><span class="hljs-operator">|</span> Variable_name   <span class="hljs-operator">|</span> <span class="hljs-keyword">Value</span> <span class="hljs-operator">|</span><br><span class="hljs-operator">+</span><span class="hljs-comment">-----------------+-------+</span><br><span class="hljs-operator">|</span> max_connections <span class="hljs-operator">|</span> <span class="hljs-number">1000</span>  <span class="hljs-operator">|</span><br><span class="hljs-operator">+</span><span class="hljs-comment">-----------------+-------+</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;export_excel&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;layui-btn&quot;</span>&gt;</span>导出excel<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
 
-<ol start="4">
-<li>退出</li>
+
+
+<h2 id="后端-Django-views视图函数"><a href="#后端-Django-views视图函数" class="headerlink" title="后端 Django views视图函数"></a><font color=" DeepSkyBlue ">后端 Django views视图函数</font></h2><ol>
+<li>urls.py 新增导出excel的路由</li>
 </ol>
-<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-operator">&gt;&gt;</span> exit<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">url(<span class="hljs-string">r&#x27;^url/your_url/$&#x27;</span>, export_excel, name=<span class="hljs-string">&#x27;export_excel&#x27;</span>),  <span class="hljs-comment"># 导出excel</span><br></code></pre></div></td></tr></table></figure>
 
+<ol start="2">
+<li>views.py 导出excel的代码</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">export_excel</span>(<span class="hljs-params">request</span>):</span><br>    f_name = request.POST.get(<span class="hljs-string">&#x27;f_name&#x27;</span>)<br>    response = HttpResponse(content_type=<span class="hljs-string">&#x27;application/vnd.ms-excel&#x27;</span>)<br>    response[<span class="hljs-string">&#x27;Content-Disposition&#x27;</span>] = <span class="hljs-string">&#x27;attachment;filename=&#x27;</span> + f_name + <span class="hljs-string">&#x27;.xls&#x27;</span><br>    <span class="hljs-string">&quot;&quot;&quot;导出excel表&quot;&quot;&quot;</span><br>    wb = xlwt.Workbook(encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>)  <span class="hljs-comment"># Create job table</span><br>    ws = wb.add_sheet(<span class="hljs-string">&#x27;Menu&#x27;</span>, cell_overwrite_ok=<span class="hljs-literal">True</span>)  <span class="hljs-comment"># Create WorkSheet</span><br>    row_num = <span class="hljs-number">0</span><br>    font_style = xlwt.XFStyle()<br>    font_style.font.bold = <span class="hljs-literal">True</span>  <span class="hljs-comment"># Binary</span><br>    columns = [<span class="hljs-string">&#x27;微信名称&#x27;</span>, <span class="hljs-string">&#x27;姓名&#x27;</span>]  <span class="hljs-comment"># Header if you add an expoeted columns</span><br>    <span class="hljs-keyword">for</span> col_num <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(columns)):  <span class="hljs-comment"># write Header content</span><br>        ws.write(row_num, col_num, columns[col_num], font_style)<br>    <span class="hljs-comment"># Sheet body, remaining rows</span><br>    font_style = xlwt.XFStyle()<br>    <span class="hljs-comment"># DB Data</span><br>    rows = User.objects.<span class="hljs-built_in">all</span>().values_list(<span class="hljs-string">&#x27;usernickname&#x27;</span>, <span class="hljs-string">&#x27;uu_name&#x27;</span>)<br>    <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rows:<br>        row_num += <span class="hljs-number">1</span><br>        <span class="hljs-comment"># Write line by line in Excel</span><br>        <span class="hljs-keyword">for</span> col_num <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(row)):<br>            ws.write(row_num, col_num, row[col_num], font_style)<br>    wb.save(response)<br>    <span class="hljs-keyword">return</span> response<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p><font color="red">response: 就是数据 返回到前端后 导出后缀为 .xls 的文件</font></p>
+</blockquote>
 
             </div>
             <hr>
@@ -338,7 +343,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Python/">Python</a>
                     
-                      <a class="hover-with-bg" href="/categories/Python/MySQL/">MySQL</a>
+                      <a class="hover-with-bg" href="/categories/Python/Django/">Django</a>
                     
                   </div>
                 
@@ -346,7 +351,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
+                      <a class="hover-with-bg" href="/tags/Django/">Django</a>
                     
                   </div>
                 
@@ -363,18 +368,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/01/Python%E5%88%97%E8%A1%A8%E5%AD%97%E5%85%B8%E6%93%8D%E4%BD%9C/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Python 列表字典的排序操作</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/25/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%9D%E5%AD%98emoji%E8%A1%A8%E6%83%85/">
-                        <span class="hidden-mobile">MySQL数据库保存emoji表情</span>
+                      <a href="/2021/04/01/Python%E5%88%97%E8%A1%A8%E5%AD%97%E5%85%B8%E6%93%8D%E4%BD%9C/">
+                        <span class="hidden-mobile">Python 列表字典的排序操作</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

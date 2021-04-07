@@ -20,7 +20,7 @@
   <meta name="author" content="柒仔与蝉鸣">
   <meta name="keywords" content="">
   
-  <title>Django Orm 导出MySQL数据库数据到Excel - 柒仔与蝉鸣</title>
+  <title>Python AWS 收录与排名 - 柒仔与蝉鸣</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -208,7 +208,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Django Orm 导出MySQL数据库数据到Excel">
+            <span class="h2" id="subtitle" title="Python AWS 收录与排名">
               
             </span>
 
@@ -223,8 +223,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-03 01:12" pubdate>
-        2021年4月3日 凌晨
+      <time datetime="2021-04-07 17:10" pubdate>
+        2021年4月7日 下午
       </time>
     </span>
   
@@ -235,7 +235,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      550 字
+      879 字
     </span>
   
 
@@ -245,7 +245,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      14
        分钟
     </span>
   
@@ -283,55 +283,61 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Django Orm 导出MySQL数据库数据到Excel</h1>
+            <h1 style="display: none">Python AWS 收录与排名</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年4月6日 下午
+                  本文最后更新于：2021年4月7日 晚上
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="Django-MySQL数据导出excel"><a href="#Django-MySQL数据导出excel" class="headerlink" title="Django MySQL数据导出excel"></a><font color=" DeepSkyBlue ">Django MySQL数据导出excel</font></h2><p><code>前情提要</code></p>
-<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell">* 本章将使用 <br>django <span class="hljs-number">1.11</span>.<span class="hljs-number">11</span> 版本<br>MySQL  <span class="hljs-number">5.7</span> 版本<br>xlrd   <span class="hljs-number">1.2</span>.<span class="hljs-number">0</span> 版本<br>xlwt   <span class="hljs-number">1.3</span>.<span class="hljs-number">0</span> 版本<br></code></pre></div></td></tr></table></figure>
+              <h2 id="Python-requests-抓取AWS收录排名"><a href="#Python-requests-抓取AWS收录排名" class="headerlink" title="Python requests 抓取AWS收录排名"></a><font color="#5e45a5">Python requests 抓取AWS收录排名</font></h2><p><font color="gree">前文提要</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">根据python requests 以及 xpath语法 正则匹配语法<br>获取页面路由 解析页面中的ASIN 以及 第几页的排名情况<br></code></pre></div></td></tr></table></figure>
 
-<p><font color="gree">安装上述依赖</font></p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">* 安装方式 <br>* pip 镜像源 https://pypi.douban.com/simple/<br>pip install django==1.11.11 -i https://pypi.douban.com/simple/<br>pip install pymysql -i https://pypi.douban.com/simple/<br>pip install xlrd -i https://pypi.douban.com/simple/<br>pip install xlwt -i https://pypi.douban.com/simple/<br></code></pre></div></td></tr></table></figure>
-
-
-
-<h2 id="前端js-html"><a href="#前端js-html" class="headerlink" title="前端js + html"></a><font color=" DeepSkyBlue ">前端js + html</font></h2><ol>
-<li>引入js文件 jq文件</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 引入外部 网络上的js --&gt;</span><br>&lt;script<br>    src=&quot;https://code.jquery.com/jquery-3.3.1.min.js&quot;<br>    integrity=&quot;sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=&quot;<br>    crossorigin=&quot;anonymous&quot;&gt;<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
-
-
-
-<ol start="2">
-<li>js函数</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">$(<span class="hljs-string">&quot;#export_excel&quot;</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>        <span class="hljs-keyword">var</span> csrf = $(<span class="hljs-string">&#x27;input[name=&quot;csrfmiddlewaretoken&quot;]&#x27;</span>).val();<br>        <span class="hljs-keyword">const</span> req = <span class="hljs-keyword">new</span> XMLHttpRequest();<br>        req.open(<span class="hljs-string">&#x27;POST&#x27;</span>, <span class="hljs-string">&#x27;/url/your url/&#x27;</span>, <span class="hljs-literal">true</span>);<br>        req.responseType = <span class="hljs-string">&#x27;blob&#x27;</span>;<br>        req.setRequestHeader(<span class="hljs-string">&#x27;Content-Type&#x27;</span>, <span class="hljs-string">&#x27;application/x-www-form-urlencoded&#x27;</span>); <span class="hljs-comment">//设置请求头</span><br>        req.send(<span class="hljs-string">&#x27;f_name=&#x27;</span> + $(<span class="hljs-string">&#x27;#f_name&#x27;</span>).val() + <span class="hljs-string">&quot;&amp;&amp;csrfmiddlewaretoken=&quot;</span> + csrf); <span class="hljs-comment">//保存的文件名称</span><br>        req.onload = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>            <span class="hljs-keyword">const</span> data = req.response;<br>            <span class="hljs-keyword">const</span> a = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;a&#x27;</span>);<br>            <span class="hljs-keyword">const</span> blob = <span class="hljs-keyword">new</span> Blob([data]);<br>            <span class="hljs-keyword">const</span> blobUrl = <span class="hljs-built_in">window</span>.URL.createObjectURL(blob);<br>            download(blobUrl);<br>        &#125;;<br><br>    &#125;);<br><br>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">download</span>(<span class="hljs-params">blobUrl</span>) </span>&#123;<br>        <span class="hljs-keyword">var</span> f_name = $(<span class="hljs-string">&quot;input[name=&#x27;f_name&#x27;]&quot;</span>).val();<br>        <span class="hljs-keyword">const</span> a = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;a&#x27;</span>);<br>        a.style.display = <span class="hljs-string">&#x27;none&#x27;</span>;<br>        a.download = f_name + <span class="hljs-string">&quot;.xls&quot;</span>;<br>        a.href = blobUrl;<br>        a.click();<br>        <span class="hljs-built_in">document</span>.body.removeChild(a);<br>    &#125;<br></code></pre></div></td></tr></table></figure>
-
-<ol start="3">
-<li>html  导出按钮</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;export_excel&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;layui-btn&quot;</span>&gt;</span>导出excel<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
-
-
-
-<h2 id="后端-Django-views视图函数"><a href="#后端-Django-views视图函数" class="headerlink" title="后端 Django views视图函数"></a><font color=" DeepSkyBlue ">后端 Django views视图函数</font></h2><ol>
-<li>urls.py 新增导出excel的路由</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">url(<span class="hljs-string">r&#x27;^url/your_url/$&#x27;</span>, export_excel, name=<span class="hljs-string">&#x27;export_excel&#x27;</span>),  <span class="hljs-comment"># 导出excel</span><br></code></pre></div></td></tr></table></figure>
-
-<ol start="2">
-<li>views.py 导出excel的代码</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">export_excel</span>(<span class="hljs-params">request</span>):</span><br>    f_name = request.POST.get(<span class="hljs-string">&#x27;f_name&#x27;</span>)<br>    response = HttpResponse(content_type=<span class="hljs-string">&#x27;application/vnd.ms-excel&#x27;</span>)<br>    response[<span class="hljs-string">&#x27;Content-Disposition&#x27;</span>] = <span class="hljs-string">&#x27;attachment;filename=&#x27;</span> + f_name + <span class="hljs-string">&#x27;.xls&#x27;</span><br>    <span class="hljs-string">&quot;&quot;&quot;导出excel表&quot;&quot;&quot;</span><br>    wb = xlwt.Workbook(encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>)  <span class="hljs-comment"># Create job table</span><br>    ws = wb.add_sheet(<span class="hljs-string">&#x27;Menu&#x27;</span>, cell_overwrite_ok=<span class="hljs-literal">True</span>)  <span class="hljs-comment"># Create WorkSheet</span><br>    row_num = <span class="hljs-number">0</span><br>    font_style = xlwt.XFStyle()<br>    font_style.font.bold = <span class="hljs-literal">True</span>  <span class="hljs-comment"># Binary</span><br>    columns = [<span class="hljs-string">&#x27;微信名称&#x27;</span>, <span class="hljs-string">&#x27;姓名&#x27;</span>]  <span class="hljs-comment"># Header if you add an expoeted columns</span><br>    <span class="hljs-keyword">for</span> col_num <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(columns)):  <span class="hljs-comment"># write Header content</span><br>        ws.write(row_num, col_num, columns[col_num], font_style)<br>    <span class="hljs-comment"># Sheet body, remaining rows</span><br>    font_style = xlwt.XFStyle()<br>    <span class="hljs-comment"># DB Data</span><br>    rows = User.objects.<span class="hljs-built_in">all</span>().values_list(<span class="hljs-string">&#x27;usernickname&#x27;</span>, <span class="hljs-string">&#x27;uu_name&#x27;</span>)<br>    <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rows:<br>        row_num += <span class="hljs-number">1</span><br>        <span class="hljs-comment"># Write line by line in Excel</span><br>        <span class="hljs-keyword">for</span> col_num <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(row)):<br>            ws.write(row_num, col_num, row[col_num], font_style)<br>    wb.save(response)<br>    <span class="hljs-keyword">return</span> response<br></code></pre></div></td></tr></table></figure>
+<p><font color="gree">测试用 路由链接</font></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.amazon.com/s?k=iphone&ref=nb_sb_noss">美国站 搜索词为 iphone</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.amazon.cn/s?k=iphone&ref=nb_sb_noss">中国站 搜索词为 iphone</a></p>
+</li>
+</ul>
+<h2 id="查看-获取信息"><a href="#查看-获取信息" class="headerlink" title="查看(获取信息)"></a><font color="#5e45a5">查看(获取信息)</font></h2><p><font color="gree">以美国站 搜索 iphone来查看</font></p>
+<p><a target="_blank" rel="noopener" href="https://www.amazon.com/s?k=iphone&amp;ref=nb_sb_noss">https://www.amazon.com/s?k=iphone&amp;ref=nb_sb_noss</a></p>
+<p><font color="gree">带Sponsored的广告排名</font></p>
+<p><img src="https://ae01.alicdn.com/kf/U8efc8490c5e64e21a390f77a73db45a9q.jpg" srcset="/img/loading.gif" alt="广告排名"></p>
+<p><a target="_blank" rel="noopener" href="https://www.amazon.com/Mkeke-iPhone-Pro-Screen-Protector/dp/B08CTYNSX7/ref=sr_1_1_sspa?dchild=1&keywords=iphone&qid=1617787283&sr=8-1-spons&psc=1&smid=A3U8Y53UO7C38F&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyQVgyWEYxNjMwTTE3JmVuY3J5cHRlZElkPUEwNjAwNTk4MzhWN0dERVlYM1MzNiZlbmNyeXB0ZWRBZElkPUEwODgwMTMwMjhDMkFWNDZZRUVWRCZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU=">点击跳转 查看路由信息</a></p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">https://www.amazon.com/<br>Mkeke-iPhone-Pro-Screen-Protector/<br>dp/B08CTYNSX7/ref=sr_1_1_sspa?<br>dchild=1&amp;keywords=iphone&amp;<br>qid=1617787283&amp;sr=8-1-spons&amp;<br>psc=1&amp;<br>smid=A3U8Y53UO7C38F&amp;<br>spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyQVgyWEYxNjMwTTE3JmVuY3J5cHRlZElkPUEwNjAwNTk4MzhWN0dERVlYM1MzNiZlbmNyeXB0ZWRBZElkPUEwODgwMTMwMjhDMkFWNDZZRUVWRCZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU=<br></code></pre></div></td></tr></table></figure>
 
 <blockquote>
-<p><font color="red">response: 就是数据 返回到前端后 导出后缀为 .xls 的文件</font></p>
+<p><font color="red">* dp/B08CTYNSX7/ref=sr_1_1_sspa?</font></p>
 </blockquote>
+<p><font color="gree">自然排名</font></p>
+<p><img src="https://ae01.alicdn.com/kf/U0993d39e5cf64c57963425073e78472aO.jpg" srcset="/img/loading.gif" alt="自然排名"></p>
+<p><font color="gree">路由解析</font></p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">https://www.amazon.com/Tracfone-Apple-iPhone-Prepaid-Smartphone/dp/B08CL4CCG2/ref=sr_1_3?dchild=1&amp;keywords=iphone&amp;qid=1617787283&amp;sr=8-3<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p><font color="red">* /dp/B08CL4CCG2/ref=sr_1_3?</font></p>
+</blockquote>
+<h2 id="使用代码获取排名"><a href="#使用代码获取排名" class="headerlink" title="使用代码获取排名"></a><font color="#5e45a5">使用代码获取排名</font></h2><p><font color="gree">构造headers 请求url</font></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_url</span>(<span class="hljs-params">keyword</span>):</span><br>    headers = &#123;<br>        <span class="hljs-string">&quot;user-agent&quot;</span>: <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36&quot;</span>,<br>        <span class="hljs-string">&quot;authority&quot;</span>: <span class="hljs-string">&quot;www.amazon.com&quot;</span>,<br>        <span class="hljs-string">&quot;accept&quot;</span>: <span class="hljs-string">&quot;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&quot;</span>,<br>        <span class="hljs-string">&quot;cookie&quot;</span>: <span class="hljs-string">&quot;session-id=131-1747394-2478939; i18n-prefs=USD; lc-main=en_US; ubid-main=135-8365978-8962108; session-token=xvpETHDUTSSp5nAFXoTx/d40nc8Vgp5Ge4deof1O1ki4bb6KWs+6KD9mPeHQWtJoRrVW9gCzZ3w+iY8HbjdFbcGxkqR1gTeTE7macaab72sZZwxZM/7BDpeqvJj2PFkt5x6j/cbbw6qKIXN0bkzLk+GvTh1JfF/uTids1d48X/Wzmo44DmPdBex1oG0/UfGxU99fv3xwHCG3Tg+WBrHwFPAydLqSykeCjh+DaT4VDGXzzTCpEYNGnqzTPXy6c+Ri; session-id-time=2082787201l; skin=noskin; csm-hit=tb:SZ3FQ85SSJ24FJ8NH5TX+s-JYM350PT95NF3YRKMX7F|1615275047338&amp;t:1615275047338&amp;adb:adblk_yes&quot;</span>,<br>        <span class="hljs-string">&quot;Referer&quot;</span>: <span class="hljs-string">&#x27;www.google.com&#x27;</span><br>    &#125;<br>    url = <span class="hljs-string">&#x27;https://www.amazon.com/s?k=&#123;&#125;&amp;ref=nb_sb_noss&#x27;</span>.<span class="hljs-built_in">format</span>(keyword)  <span class="hljs-comment"># 获取关键词 搜索页面 .com .cn</span><br>    resp = requests.get(url=url, headers=headers)  <span class="hljs-comment"># 添加headers 否则会出现503</span><br>    <span class="hljs-keyword">return</span> resp.content.decode(<span class="hljs-string">&#x27;utf8&#x27;</span>)  <span class="hljs-comment"># 返回页面 解码后</span><br></code></pre></div></td></tr></table></figure>
+
+<p><font color="gree">构造xpath 获取链接值</font></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    keyword = <span class="hljs-string">&quot;iphone&quot;</span>  <span class="hljs-comment"># 关键词</span><br>    page = get_url(keyword)  <span class="hljs-comment"># 调用解析url的函数</span><br><br>    xpath_grammar = [<span class="hljs-string">&#x27;//h2/a/@href&#x27;</span>, <span class="hljs-string">&#x27;//h2/a/span/text()&#x27;</span>]  <span class="hljs-comment"># xpath_语法</span><br>    get_info(page, xpath_grammar)  <span class="hljs-comment"># 调用获取数据的函数</span><br></code></pre></div></td></tr></table></figure>
+
+<p><font color="gree">构造re获取asin 与 排名</font></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_info</span>(<span class="hljs-params">page, country_mapper</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    page : 目的解析html页面结构</span><br><span class="hljs-string">    country_mapper : xpath_语法</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    html = etree.HTML(page)<br>    url_list = html.xpath(country_mapper[<span class="hljs-number">0</span>])  <span class="hljs-comment"># a标签的href值</span><br>    span_list = html.xpath(country_mapper[<span class="hljs-number">1</span>])  <span class="hljs-comment"># span标签的值 暂无用到</span><br>    <span class="hljs-comment"># 正则语法 1. 匹配ref   2. 匹配 %2F...</span><br>    re_grammar = [<span class="hljs-string">r&#x27;[\w]&#123;10&#125;/ref=\w+&#x27;</span>, <span class="hljs-string">r&#x27;[\w]&#123;10&#125;%2Fref%3D\w+&#x27;</span>]<br>    get_data(url_list, re_grammar)<br></code></pre></div></td></tr></table></figure>
+
+<p><font color="gree">获取广告排名/获取自然排名</font></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_data</span>(<span class="hljs-params">url_list, re_grammar</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    :param url_list: 数据列表</span><br><span class="hljs-string">    :param re_grammar: 正则表达式</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># print(url_list)</span><br>    pattern = re.<span class="hljs-built_in">compile</span>(re_grammar[<span class="hljs-number">0</span>])<br>    <span class="hljs-keyword">for</span> text <span class="hljs-keyword">in</span> url_list:  <span class="hljs-comment"># 获取第一种方式</span><br>        get_format_info(pattern, text, <span class="hljs-number">1</span>)<br><br>    pattern2 = re.<span class="hljs-built_in">compile</span>(re_grammar[<span class="hljs-number">1</span>])<br>    <span class="hljs-keyword">for</span> text2 <span class="hljs-keyword">in</span> url_list:  <span class="hljs-comment"># 获取第二种方式</span><br>        get_format_info(pattern2, text2, <span class="hljs-number">2</span>)<br></code></pre></div></td></tr></table></figure>
+
+<p><font color="gree">最终的格式</font></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_format_info</span>(<span class="hljs-params">pattern, text, to_num</span>):</span><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    获取最终数据 格式的打印</span><br><span class="hljs-string">    :param pattern: 正则语法 1 r&#x27;[\w]&#123;10&#125;/ref=\w+&#x27;</span><br><span class="hljs-string">    :param pattern: 正则语法 2 r&#x27;[\w]&#123;10&#125;%2Fref%3D\w+&#x27;</span><br><span class="hljs-string">    :param text: 字符串 语句</span><br><span class="hljs-string">    :param to_num: 确认获取的是哪个</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    info = pattern.search(text)<br>    <span class="hljs-keyword">if</span> info <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>        <span class="hljs-keyword">if</span> to_num == <span class="hljs-number">1</span>:<br>            split_info = <span class="hljs-built_in">str</span>(info.group(<span class="hljs-number">0</span>)).split(<span class="hljs-string">&#x27;/&#x27;</span>)  <span class="hljs-comment"># 以 / 切割</span><br>        <span class="hljs-keyword">else</span>:<br>            split_info = <span class="hljs-built_in">str</span>(info.group(<span class="hljs-number">0</span>)).split(<span class="hljs-string">&#x27;%2Fref%3D&#x27;</span>)  <span class="hljs-comment"># 以 %2Fref%3D 切割</span><br>        asin_ranking_dict = &#123;split_info[<span class="hljs-number">0</span>]: split_info[<span class="hljs-number">1</span>]&#125;  <span class="hljs-comment"># 格式 &#123;&quot;B085BGNQXR&quot;:&quot;ref=sr_1_18&quot;&#125;</span><br>        asin = get_asin()  <span class="hljs-comment"># 调用 获取asin函数</span><br>        <span class="hljs-keyword">for</span> a <span class="hljs-keyword">in</span> asin:<br>            <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> asin_ranking_dict.items():<br>                <span class="hljs-keyword">if</span> a == k:<br>                    print(k + <span class="hljs-string">&quot; - &quot;</span> + v)  <span class="hljs-comment"># 结果输出</span><br></code></pre></div></td></tr></table></figure>
+
+<p><font color="gree">asin的对比排名</font></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_asin</span>():</span><br>    asin = [<br>        <span class="hljs-string">&#x27;B08CTYNSX7&#x27;</span>, <span class="hljs-string">&#x27;B08D3VH7G8&#x27;</span>, <span class="hljs-string">&#x27;B084GS5W9T&#x27;</span>, <span class="hljs-string">&#x27;B08CL4CCG2&#x27;</span>, <span class="hljs-string">&#x27;B07VSWLY55&#x27;</span>,<br>        <span class="hljs-string">&#x27;B07VSSS3ZN&#x27;</span>, <span class="hljs-string">&#x27;B08L5NDJ8H&#x27;</span>, <span class="hljs-string">&#x27;B08L5MJTCP&#x27;</span>, <span class="hljs-string">&#x27;B084GS884N&#x27;</span>, <span class="hljs-string">&#x27;B0875YBSLD&#x27;</span><br>    ]<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    # 打印结果</span><br><span class="hljs-string">    B084GS5W9T - ref=sr_1_3</span><br><span class="hljs-string">    B08CL4CCG2 - ref=sr_1_4</span><br><span class="hljs-string">    B07VSWLY55 - ref=sr_1_5</span><br><span class="hljs-string">    B07VSSS3ZN - ref=sr_1_6</span><br><span class="hljs-string">    B08L5NDJ8H - ref=sr_1_7</span><br><span class="hljs-string">    B08L5MJTCP - ref=sr_1_8</span><br><span class="hljs-string">    B084GS884N - ref=sr_1_9</span><br><span class="hljs-string">    B0875YBSLD - ref=sr_1_10</span><br><span class="hljs-string">    B08CTYNSX7 - sr_1_1_sspa</span><br><span class="hljs-string">    B08D3VH7G8 - sr_1_2_sspa</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> asin<br></code></pre></div></td></tr></table></figure>
+
 
             </div>
             <hr>
@@ -343,7 +349,7 @@
                     
                       <a class="hover-with-bg" href="/categories/Python/">Python</a>
                     
-                      <a class="hover-with-bg" href="/categories/Python/Django/">Django</a>
+                      <a class="hover-with-bg" href="/categories/Python/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
                     
                   </div>
                 
@@ -351,7 +357,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Django/">Django</a>
+                      <a class="hover-with-bg" href="/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
                     
                   </div>
                 
@@ -368,18 +374,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/07/%E6%94%B6%E5%BD%95%E4%B8%8E%E6%8E%92%E5%90%8D/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Python AWS 收录与排名</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/01/Python%E5%88%97%E8%A1%A8%E5%AD%97%E5%85%B8%E6%93%8D%E4%BD%9C/">
-                        <span class="hidden-mobile">Python 列表字典的排序操作</span>
+                      <a href="/2021/04/03/django%E5%AF%BC%E5%87%BAexcel/">
+                        <span class="hidden-mobile">Django Orm 导出MySQL数据库数据到Excel</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

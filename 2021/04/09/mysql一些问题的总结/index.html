@@ -279,10 +279,10 @@
 <h2 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h2><p>group by 如果 返回的name中有相同的name会自动去重取第一个</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"><span class="hljs-keyword">select</span> <span class="hljs-type">name</span>,sum(chinese+english+math) <span class="hljs-keyword">as</span> &quot;总分&quot; <span class="hljs-keyword">from</span> students <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> <span class="hljs-type">name</span>;<br></code></pre></div></td></tr></table></figure>
 
-<p>原表数据：<img src="C:\Users\Hunk\AppData\Local\Temp\1617883619624.png" srcset="/img/loading.gif" alt="1617883619624">查询结果：<img src="C:\Users\Hunk\AppData\Local\Temp\1617883550694.png" srcset="/img/loading.gif" alt="1617883550694"><br>解决：</p>
+<p>原表数据：<img src="https://ae01.alicdn.com/kf/U827427c8057d475aadca6e88afe40af0j.jpg" srcset="/img/loading.gif" alt="1617883619624">查询结果：<img src="https://ae01.alicdn.com/kf/Ufcf779f123654ead97a1c506ebe8623d8.jpg" srcset="/img/loading.gif" alt="1617883550694"><br>解决：</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql"><span class="hljs-keyword">select</span> <span class="hljs-type">name</span>,chinese+english+math <span class="hljs-keyword">as</span> &quot;总分&quot; <span class="hljs-keyword">from</span> students;<br></code></pre></div></td></tr></table></figure>
 
-<p>查询结果：<img src="C:\Users\Hunk\AppData\Local\Temp\1617883778292.png" srcset="/img/loading.gif" alt="1617883778292"></p>
+<p>查询结果：<img src="https://ae01.alicdn.com/kf/Ua64f86f0ae824c13bf99f8a3c62315f8p.jpg" srcset="/img/loading.gif" alt="1617883778292"></p>
 
             </div>
             <hr>

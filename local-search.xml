@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Python python venv创建虚拟环境</title>
+    <link href="/2021/04/30/python%20venv%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/"/>
+    <url>/2021/04/30/python%20venv%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><code>不填路径默认为当前路径</code></p><p><code>python -m venv 文件路径</code></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Python</category>
+      
+      <category>笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>笔记</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>mysql语句的一些问题记录</title>
     <link href="/2021/04/09/mysql%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%BB%E7%BB%93/"/>
     <url>/2021/04/09/mysql%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%BB%E7%BB%93/</url>

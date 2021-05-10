@@ -211,7 +211,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      495 字
+      480 字
     </span>
   
 
@@ -263,16 +263,16 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年5月7日 上午
+                  本文最后更新于：2021年5月7日 晚上
                 
               </p>
             
             <div class="markdown-body">
               <figure class="highlight subunit"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs subunit">title: 词根矩阵post<br>index_img: https://ae01.alicdn.com/kf/U810871f744ff4a1f9b4c232bf0f7f0f4v.jpg<br>category:<br>- Python<br>- django<br><span class="hljs-keyword">tags:</span><br>- 矩阵<br>password: <br>message: <br>sticky: true<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="词根矩阵"><a href="#词根矩阵" class="headerlink" title="词根矩阵"></a>词根矩阵</h2><ul>
+<h2 id="词根矩阵"><a href="#词根矩阵" class="headerlink" title="词根矩阵"></a><font color="#5e45a5">词根矩阵</font></h2><ul>
 <li><p>请求方法：POST</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">post</span>(<span class="hljs-params">self, request</span>):</span><br>    <span class="hljs-keyword">try</span>:<br>        data_list = json.loads(request.POST.get(<span class="hljs-string">&#x27;roots&#x27;</span>))<br>        pid = request.POST.get(<span class="hljs-string">&#x27;pid&#x27;</span>)<br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;参数不正确&#x27;</span>&#125;)<br>    user = is_master(request.user)<br>    <span class="hljs-keyword">try</span>:<br>        AffirmCategory.objects.get(<span class="hljs-built_in">id</span>=pid, user_foreign=user.<span class="hljs-built_in">id</span>)<br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;分类不存在 请检查是否已删除&#x27;</span>&#125;)<br>    root_lists = [data.get(<span class="hljs-string">&#x27;root&#x27;</span>) <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> data_list]<br>    <span class="hljs-keyword">with</span> transaction.atomic():<br>        save_id = transaction.savepoint()<br>    <span class="hljs-keyword">try</span>:<br>        PositiveCk.objects.<span class="hljs-built_in">filter</span>(positive_name__in=root_lists).<span class="hljs-built_in">filter</span>(pid=pid).delete()<br>        root_dict_list = get_root_dict_list(data_list, pid)<br>        res = delete_positive(pid)<br>        <span class="hljs-keyword">if</span> res == <span class="hljs-number">1</span>:  <span class="hljs-comment"># TODO 12</span><br>            transaction.rollback(save_id)<br>            <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;Internal de duplication error in Positive ROOT&#x27;</span>&#125;)<br>        data_list = get_ring_data(root_dict_list)<br>        res = save_positive_ck(data_list, <span class="hljs-built_in">int</span>(pid))<br>        <span class="hljs-keyword">if</span> res == <span class="hljs-number">1</span>:  <span class="hljs-comment"># TODO 13</span><br>            transaction.rollback(save_id)<br>            <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;肯定词矩阵词根保存失败 请刷新后重新请求&#x27;</span>&#125;)<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        transaction.rollback(save_id)<br>        <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;保存失败,请重新请求&#x27;</span>&#125;)<br>    <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.OK&#125;)<br></code></pre></div></td></tr></table></figure></li>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">post</span>(<span class="hljs-params">self, request</span>):</span><br>    <span class="hljs-keyword">try</span>:<br>        data_list = json.loads(request.POST.get(<span class="hljs-string">&#x27;roots&#x27;</span>))<br>        pid = request.POST.get(<span class="hljs-string">&#x27;pid&#x27;</span>)<br>        <span class="hljs-keyword">except</span>:<br>            <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;参数不正确&#x27;</span>&#125;)<br>        user = is_master(request.user)<br>        <span class="hljs-keyword">try</span>:<br>            AffirmCategory.objects.get(<span class="hljs-built_in">id</span>=pid, user_foreign=user.<span class="hljs-built_in">id</span>)<br>            <span class="hljs-keyword">except</span>:<br>                <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;分类不存在 请检查是否已删除&#x27;</span>&#125;)<br>            root_lists = [data.get(<span class="hljs-string">&#x27;root&#x27;</span>) <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> data_list]<br>            <span class="hljs-keyword">try</span>:<br>                PositiveCk.objects.<span class="hljs-built_in">filter</span>(positive_name__in=root_lists).<span class="hljs-built_in">filter</span>(pid=pid).delete()<br>                root_dict_list = get_root_dict_list(data_list, pid)<br>                res = delete_positive(pid)<br>                <span class="hljs-keyword">if</span> res == <span class="hljs-number">1</span>:  <span class="hljs-comment"># TODO 12</span><br>                    <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;Internal de duplication error in Positive ROOT&#x27;</span>&#125;)<br>                data_list = get_ring_data(root_dict_list)<br>                res = save_positive_ck(data_list, <span class="hljs-built_in">int</span>(pid))<br>                <span class="hljs-keyword">if</span> res == <span class="hljs-number">1</span>:  <span class="hljs-comment"># TODO 13</span><br>                    <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;肯定词矩阵词根保存失败 请刷新后重新请求&#x27;</span>&#125;)<br>                <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>                    <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.DBERR, <span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;保存失败,请重新请求&#x27;</span>&#125;)<br>                <span class="hljs-keyword">return</span> Response(&#123;<span class="hljs-string">&#x27;code&#x27;</span>: RET.OK&#125;)<br></code></pre></div></td></tr></table></figure></li>
 <li><p>get_root_dict_list方法</p>
 <figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">def get_root_dict_list(data_list, pid):<br>    # 从小到大排序<br>    positiveck = PositiveCk.objects.filter(pid=pid, is_delete=0).order_by(&#x27;is_positive_ring_number&#x27;)<br><br>    root_dict = &#123;&#125;<br>    root_dict_list = []<br>    for p in positiveck:<br>        root_dict[&#x27;rootfrequency&#x27;] = p.positive_frequirency<br>        root_dict[&#x27;root&#x27;] = p.positive_name<br>        root_dict[&#x27;ring&#x27;] = p.is_positive_ring_number<br>        root_dict_list.append(root_dict)<br>        root_dict = &#123;&#125;<br>    # 实现后面添加的数据放在最后面<br>    root_dict_list.extend(data_list)<br>    return root_dict_list<br></code></pre></div></td></tr></table></figure></li>
 <li><p>get_ring_data方法</p>
@@ -409,33 +409,6 @@
   
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <span>
-      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
-        晋ICP证2021005257号
-      </a>
-    </span>
-    
-      
-        <span>
-          <a
-            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2021005257"
-            rel="nofollow noopener"
-            class="beian-police"
-            target="_blank"
-          >
-            
-              <span style="visibility: hidden; width: 0">|</span>
-              <img src="https://ae01.alicdn.com/kf/Ua271b6001e4e4cf4995b23fad8401cba0.jpg" srcset="/img/loading.gif" alt="police-icon"/>
-            
-            <span>晋ICP备2021005257号</span>
-          </a>
-        </span>
-      
-    
-  </div>
-
 
       
 </footer>
@@ -589,7 +562,7 @@
       //运行时间bynote.cn
       var now = new Date();
       function createtime() {
-        var grt = new Date("10/15/2020 17:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        var grt = new Date("04/24/2021 5:20:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
         now.setTime(now.getTime() + 250);
         days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
         hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);

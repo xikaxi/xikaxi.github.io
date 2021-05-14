@@ -1,0 +1,613 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://ae01.alicdn.com/kf/U9640f5f53a254d3ea8eb3d5e6b14d500J.jpg">
+  <link rel="icon" href="/images/snipaste20210409_112955.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="">
+  
+  <meta name="author" content="掠">
+  <meta name="keywords" content="">
+  
+  <title>微信支付-前端HTML - 掠</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/toubudaziji.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>掠</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/playlist/">
+                <i class="iconfont icon-music"></i>
+                music
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://ae01.alicdn.com/kf/Uceecb778c2e04c9a89dd0bfa911a0e63w.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="微信支付-前端HTML">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      掠
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-09 10:53" pubdate>
+        2021年4月9日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      772 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">微信支付-前端HTML</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年4月1日 上午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="WeChatPay☟"><a href="#WeChatPay☟" class="headerlink" title=" WeChatPay☟"></a><font color=" DeepSkyBlue "> WeChatPay☟</font></h2><p><strong><code>前情提要</code> <a href="#">☟</a></strong></p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx">本章使用: Python3.6 django MySQL<br>项目使用微信支付 购买会员 django+pc端<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="使用django创建项目"><a href="#使用django创建项目" class="headerlink" title="使用django创建项目"></a><font color=" DeepSkyBlue ">使用django创建项目</font></h2><p><strong>Django 安装</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">pip install django==<span class="hljs-number">1.11</span><span class="hljs-number">.11</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>Django 创建项目</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">django-admin startproject WeChatPay<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>Django 创建好项目后 新建一个子应用</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">python manage.py startapp pay<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>项目目录结构</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">├── WeChatPay<br>│	├── pay        <span class="hljs-comment"># 子应用(包)</span><br>│	│	├── __init__.py<br>│	│	├── models.py  <span class="hljs-comment"># 模型类</span><br>│	│	├── test.py<br>│	│	├── views.py <span class="hljs-comment"># 视图函数</span><br>│	├── templates  <span class="hljs-comment"># 模板文件的文件夹 html</span><br>│	├── static     <span class="hljs-comment"># 静态资源文件夹 例如js css等</span><br>│	├── WeChatPay  <span class="hljs-comment"># 跟项目同名的文件夹</span><br>│	│   ├── __init__.py<br>│	│   ├── settings <span class="hljs-comment"># 配置文件的位置</span><br>│	│   ├── urls.py  <span class="hljs-comment"># 全局路由</span><br>│	│   └── wsgi.py<br>│	├── manage.py<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>在跟项目同名下的 settings.py文件里面 配置子应用</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">INSTALLED_APPS = [<br>    <span class="hljs-string">&#x27;...&#x27;</span>,<br>    <span class="hljs-string">&#x27;pay&#x27;</span>,  <span class="hljs-comment"># 微信支付</span><br>    <span class="hljs-string">&#x27;...&#x27;</span><br>]<br><br>MIDDLEWARE = [<br>    <span class="hljs-string">&#x27;django.middleware.security.SecurityMiddleware&#x27;</span>,<br>    <span class="hljs-string">&#x27;django.contrib.sessions.middleware.SessionMiddleware&#x27;</span>,<br>    <span class="hljs-string">&#x27;django.middleware.common.CommonMiddleware&#x27;</span>,<br>    <span class="hljs-comment">#&#x27;django.middleware.csrf.CsrfViewMiddleware&#x27;,</span><br>    <span class="hljs-string">&#x27;django.contrib.auth.middleware.AuthenticationMiddleware&#x27;</span>,<br>    <span class="hljs-string">&#x27;django.contrib.messages.middleware.MessageMiddleware&#x27;</span>,<br>    <span class="hljs-string">&#x27;django.middleware.clickjacking.XFrameOptionsMiddleware&#x27;</span>,<br>]<br><br><span class="hljs-comment"># 配置静态资源的请求</span><br>STATIC_URL = <span class="hljs-string">&#x27;/static/&#x27;</span><br>STATICFILES_DIRS = (<br>    os.path.join(os.path.join(BASE_DIR, <span class="hljs-string">&#x27;static&#x27;</span>)),<br>)<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="配置前端文件"><a href="#配置前端文件" class="headerlink" title="配置前端文件"></a><font color=" DeepSkyBlue ">配置前端文件</font></h2><p><strong>在templates里面新建index.html</strong></p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;meta charset=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;<br>    &lt;title&gt;微信支付&lt;/title&gt;<br>    &lt;style&gt;<br><br>        .main_div&#123;<br>            width: 320px;<br>            height: 150px;<br>            text-align: center;<br>            margin:<span class="hljs-number">0</span> auto;<br>            margin-top: 100px;<br>            border: aquamarine 2px solid;<br>            border-radius: 5px;<br>        &#125;<br>    &lt;/style&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br><br>    &lt;div class=&quot;main_div&quot;&gt;<br>        &lt;br&gt;<br>        &lt;h1&gt;进行微信支付测试？&lt;/h1&gt;<br>        &lt;a href=&quot;pay&quot;&gt;确定&lt;/a&gt;<br>    &lt;/div&gt;<br><br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>在templates里面新建qrcode.html</strong></p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">&lt;!DOCTYPE html&gt;<br>&lt;html lang=<span class="hljs-string">&quot;zh-CN&quot;</span>&gt;<br><br>&lt;head&gt;<br>    &lt;meta charset=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;<br>    &lt;title&gt;扫码支付&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;style&gt;<br>    .box &#123;<br>        position: absolute;<br>        left: <span class="hljs-number">50</span>%;<br>        top: <span class="hljs-number">10</span>%;<br>        transform: translate(-<span class="hljs-number">50</span>%);<br>        text-align: center;<br>    &#125;<br>    .conten &#123;<br>        width: <span class="hljs-number">100</span>%;<br>    &#125;<br>    body &#123;<br>        background: <span class="hljs-comment">#ccc;</span><br>    &#125;<br>&lt;/style&gt;<br>&lt;body&gt;<br>    &#123;% load staticfiles %&#125;<br>    &lt;div class=&quot;box&quot;&gt;<br>        &lt;h2 class=&quot;content&quot;&gt;&lt;span&gt;扫码支付&lt;/span&gt;&lt;/h2&gt;<br>        &lt;h5&gt;订单号：&lt;span id=&quot;out_trade_no&quot;&gt;&#123;&#123; out_trade_no &#125;&#125;&lt;/span&gt;&lt;/h5&gt;<br>        &lt;!--&lt;h2&gt;扫码支付&lt;/h2&gt;--&gt;<br>        &lt;img src=&quot;&#123;% static qrcode_name %&#125;&quot;/&gt;&lt;!--显示支付二维码--&gt;<br>        &lt;br&gt;<br>        &lt;span id=&quot;message&quot;&gt;&lt;/span&gt;<br>    &lt;/div&gt;<br><br>&lt;/body&gt;<br><br>&lt;script <span class="hljs-built_in">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;<br>	var websocket = null;//websocket 的变量<br>	function load() &#123;//初始化 websocket<br>		//获取订单号<br>		var out_trade_no = <span class="hljs-string">&quot;&#123;&#123; out_trade_no &#125;&#125;&quot;</span>;<br>		//建立连接<br>		<span class="hljs-keyword">if</span> (<span class="hljs-string">&#x27;WebSocket&#x27;</span> <span class="hljs-keyword">in</span> window) &#123;//支持 websocket<br>            // 此处为获取支付是否成功<br>			websocket = new WebSocket(<span class="hljs-string">&quot;ws://localhost:80/websocketLink/&quot;</span> + out_trade_no);<br>			websocket.onopen = function() &#123;<br>				fillData(<span class="hljs-string">&quot;请在两小时内完成支付&quot;</span>)<br>			&#125;<br>			websocket.onclose = function() &#123;<br>				fillData(<span class="hljs-string">&quot;连接关闭了&quot;</span>)<br>			&#125;<br>			websocket.onerror = function() &#123;<br>				fillData(<span class="hljs-string">&quot;出现错误了&quot;</span>)<br>			&#125;<br>			websocket.onmessage = function(event) &#123;<br>				fillData(event.data);<br>				alert(<span class="hljs-string">&quot;支付成功！！！&quot;</span>);<br>				<span class="hljs-keyword">if</span> (window.s) &#123;<br>                    window.s.close();//关闭websocket<br>                    console.log(<span class="hljs-string">&#x27;websocket已关闭&#x27;</span>);<br>                &#125;<br>			&#125;<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			alert(<span class="hljs-string">&quot;浏览器不支持 websocket&quot;</span>)<br>		&#125;<br>		//设置监听,当有消息来的时候的监听<br>	&#125;<br>	function fillData(data) &#123;<br>		document.getElementById(<span class="hljs-string">&quot;message&quot;</span>).innerHTML = data;<br>	&#125;<br>	window.onload=load();//页面加载完成后执行 load 方法<br>&lt;/script&gt;<br>&lt;/html&gt;<br></code></pre></div></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/WeChat/">WeChat</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/WeChat-Pay/">WeChat Pay</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/09/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-3/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">微信支付-后端VIEW</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/09/%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98-1/">
+                        <span class="hidden-mobile">微信支付获取开发者id 密钥</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "m4lFuQXnnTDGDinsm73TC8zv-gzGzoHsz",
+          app_key: "uGukCqwYSQwFXmED9y2i5Xdu",
+          placeholder: "牛逼的人 早已提出问题",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://xikaxi.github.io/" target="_blank" rel="nofollow noopener"><span>Rudy</span></a> <i class="iconfont icon-love"></i> <a href="https://xikaxi.github.io/" target="_self" rel="nofollow noopener"><span>掠</span></a> 
+  </div>
+  
+
+    
+
+      
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/caidai.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/timeDate.js"></script>
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+  <center>
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+      //运行时间bynote.cn
+      var now = new Date();
+      function createtime() {
+        var grt = new Date("04/24/2021 5:20:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if (String(hnum).length == 1) { hnum = "0" + hnum; } minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if (String(mnum).length == 1) { mnum = "0" + mnum; }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if (String(snum).length == 1) { snum = "0" + snum; }
+        document.getElementById("timeDate").innerHTML = "本站已运行 " + dnum + " 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+      setInterval("createtime()", 11150);
+    </script>
+  </center>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/mikoto.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>

@@ -434,7 +434,7 @@ img[srcset] {
     :root:not([data-user-color-scheme]) .navbar .dropdown-collapse,
     :root:not([data-user-color-scheme]) .top-nav-collapse,
     :root:not([data-user-color-scheme]) .navbar-col-show {
-      background: rgba(31,49,68,0.7);
+      background: rgba(31,49,68,0.5);
       -webkit-backdrop-filter: blur(3px);
       backdrop-filter: blur(3px);
     }
@@ -532,7 +532,7 @@ img[srcset] {
   [data-user-color-scheme='dark'] .navbar .dropdown-collapse,
   [data-user-color-scheme='dark'] .top-nav-collapse,
   [data-user-color-scheme='dark'] .navbar-col-show {
-    background: rgba(31,49,68,0.7);
+    background: rgba(31,49,68,0.5);
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
   }
@@ -912,7 +912,7 @@ img[srcset] {
   .navbar .dropdown-collapse,
   .top-nav-collapse,
   .navbar-col-show {
-    background: rgba(47,65,84,0.7);
+    background: rgba(47,65,84,0.5);
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
   }
@@ -1845,23 +1845,36 @@ note-default {
   object-fit: cover;
   -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-
-  /* 鼠标经过头像旋转360度 */
-  -webkit-transition: -webkit-transform 1.0s ease-out;
-  -moz-transition: -moz-transform 1.0s ease-out;
-  transition: transform 1.0s ease-out;
+/* 鼠标经过头像旋转360度 */
+  -webkit-transition: -webkit-transform 1s ease-out;
+  -moz-transition: -moz-transform 1s ease-out;
+  transition: transform 1s ease-out;
 }
-
-.about-avatar img:hover {
-  /* 鼠标经过停止头像旋转 
+img:hover {
+/* 鼠标经过停止头像旋转 
   -webkit-animation-play-state:paused;
   animation-play-state:paused;*/
-  /* 鼠标经过头像旋转360度 */
+/* 鼠标经过头像旋转360度 */
   -webkit-transform: rotateZ(360deg);
   -moz-transform: rotateZ(360deg);
   transform: rotateZ(360deg);
 }
-
+@-webkit-keyframes play {
+  0% {
+    -webkit-transform: rotateZ(0deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(-360deg);
+  }
+}
+@-moz-keyframes play {
+  0% {
+    -moz-transform: rotateZ(0deg);
+  }
+  100% {
+    -moz-transform: rotateZ(-360deg);
+  }
+}
 .about-info > div {
   margin-bottom: 0.5rem;
 }
@@ -1877,6 +1890,38 @@ note-default {
 }
 .about-icons > a > i {
   font-size: 1.5rem;
+}
+@-moz-keyframes play {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(-360deg);
+  }
+}
+@-webkit-keyframes play {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(-360deg);
+  }
+}
+@-o-keyframes play {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(-360deg);
+  }
+}
+@keyframes play {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(-360deg);
+  }
 }
 .category:not(:last-child) {
   margin-bottom: 1rem;
@@ -1977,26 +2022,13 @@ note-default {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   object-fit: cover;
-  
-   -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-
-  /* 鼠标经过头像旋转360度 */
-  -webkit-transition: -webkit-transform 1.0s ease-out;
-  -moz-transition: -moz-transform 1.0s ease-out;
-  transition: transform 1.0s ease-out;
+/* 鼠标经过头像旋转360度 */
+  -webkit-transition: -webkit-transform 1s ease-out;
+  -moz-transition: -moz-transform 1s ease-out;
+  transition: transform 1s ease-out;
 }
-
-.link-avatar img:hover {
-  /* 鼠标经过停止头像旋转 
-  -webkit-animation-play-state:paused;
-  animation-play-state:paused;*/
-  /* 鼠标经过头像旋转360度 */
-  -webkit-transform: rotateZ(360deg);
-  -moz-transform: rotateZ(360deg);
-  transform: rotateZ(360deg);
-}
-
 .link-text {
   flex: 1;
   display: grid;
